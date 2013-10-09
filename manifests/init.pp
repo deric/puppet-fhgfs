@@ -29,25 +29,23 @@
 #
 # === Authors
 #
-# Author Name <author@domain.com>
+# Tomas Barton <barton.tomas@gmail.com>
 #
 # === Copyright
 #
-# Copyright 2013 Your name here, unless otherwise noted.
+# Copyright 2013 Tomas Barton, unless otherwise noted.
 #
 class fhgfs {
-  $mgmtd_host = 'localhost',
-  $meta_directory = '/meta',
-  $storage_directory = '/storage',
-  $mgmtd_directory = '/mgmtd',
-  $client_auto_remove_mins = 0,
-  $meta_space_low_limit = '5G',
-  $meta_space_emergency_limit = '3G',
-  $storage_space_low_limit = '100G',
-  $storage_space_emergency_limit = '10G',
-  $version = '2011.04.r21-el6',
-  $major_version = '2011',
-) {
+
+) inherits fhgfs::params {
+
+
+  class { 'fhgfs::repo'
+    $manage_repo    = true,
+    $package_source = 'fhgfs',
+    $version        = 'fhgfs_2012.10'
+  }
+
   case $major_version {
     default: {
       require yum::repo::fhgfs
@@ -66,6 +64,17 @@ class fhgfs {
   file { '/etc/fhgfs/fhgfs-client.conf':
     require => Package['fhgfs-utils'],
     content => template('fhgfs/fhgfs-client.conf.erb'),
+  }
+  
+  # Allow the end user to establish relationships to the "main" class
+  # and preserve the relationship to the implementation classes through
+  # a transitive relationship to the composite class.
+  anchor{ 'fhgfs::begin':
+    before => Class['fhgfs::repo'],
+    notify => Class['fhgfs::service'],
+  }
+  anchor { 'fhgfs::end':
+    require => Class['fhgfs::service'],
   }
 
 }
