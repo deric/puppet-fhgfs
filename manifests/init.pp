@@ -70,12 +70,12 @@ class fhgfs (
   # Allow the end user to establish relationships to the "main" class
   # and preserve the relationship to the implementation classes through
   # a transitive relationship to the composite class.
-  anchor{ 'fhgfs::begin':
-    before => Class['fhgfs::repo'],
-    notify => Class['fhgfs::service'],
-  }
-  anchor { 'fhgfs::end':
-    require => Class['fhgfs::service'],
-  }
+  #anchor{ 'fhgfs::begin':
+  #  before => Class['fhgfs::repo'],
+  #  notify => Class['fhgfs::service'],
+  #}
+  #anchor { 'fhgfs::end':
+  #  require => Class['fhgfs::service'],
+  #}
 
 }
