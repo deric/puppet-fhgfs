@@ -17,7 +17,23 @@ class fhgfs::repo::debian (
         'squeeze': {
           $folder = 'deb6'
         }
+        default: {
+          fail ("${::lsbdistcodename} is not supported yet")
+        }
       }
+    }
+    Ubuntu: {
+      case $::lsbdistcodename {
+        'precise': {
+          $folder = 'deb7'
+        }
+        default: {
+          fail ("${::lsbdistcodename} is not supported yet")
+        }
+      }
+    }
+    default: {
+      fail ("${$::operatingsystem} is not supported yet")
     }
   }
 
@@ -35,7 +51,7 @@ class fhgfs::repo::debian (
       'fhgfs': {
         apt::source { 'fhgfs':
           location   => "http://www.fhgfs.com/release/${version}/${folder}",
-          repos      => 'fhgfs',
+          repos      => 'non-free',
           key        => '64497785',
           key_source => 'http://www.fhgfs.com/release/latest-stable/gpg/DEB-GPG-KEY-fhgfs',
           notify     => Exec['apt_get_update_for_fhgfs'],
