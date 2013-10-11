@@ -2,7 +2,7 @@
 
 class fhgfs::repo::debian (
   $manage_repo    = true,
-  $package_source = $fhgfs::params::package_source
+  $package_source = $fhgfs::params::package_source,
   $version        = $fhgfs::params::version,
 ) {
 
