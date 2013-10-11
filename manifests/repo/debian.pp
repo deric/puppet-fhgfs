@@ -2,8 +2,8 @@
 
 class fhgfs::repo::debian (
   $manage_repo    = true,
-  $package_source = 'fhgfs',
-  $version        = 'fhgfs_2012.10'
+  $package_source = $fhgfs::params::package_source
+  $version        = $fhgfs::params::version,
 ) {
 
 

@@ -12,17 +12,19 @@ class fhgfs::mgmtd (
   $storage_space_emergency_limit = $fhgfs::storage_space_emergency_limit,
   $version                       = $fhgfs::version,
 ) inherits fhgfs {
+
   package { 'fhgfs-mgmtd':
     ensure => $version,
   }
+
   file { '/etc/fhgfs/fhgfs-mgmtd.conf':
     require => Package['fhgfs-mgmtd'],
     content => template('fhgfs/fhgfs-mgmtd.conf.erb'),
   }
+
   service { 'fhgfs-mgmtd':
     ensure    => running,
     enable    => $enable,
-    provider  => redhat,
     require   => Package['fhgfs-mgmtd'],
     subscribe => File['/etc/fhgfs/fhgfs-mgmtd.conf'];
   }

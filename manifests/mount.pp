@@ -11,6 +11,7 @@ define fhgfs::mount ($cfg, $mnt, $subdir = '') {
     group   => root,
     mode    => '0755',
   }
+
   file { "/etc/fhgfs/${cfg}":
     require => Package['fhgfs-client'],
     source  => "puppet:///files/fhgfs/${subdir}/${cfg}",

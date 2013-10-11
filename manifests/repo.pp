@@ -14,21 +14,14 @@
 #
 # This class file is not called directly
 class fhgfs::repo(
-  $manage_repo    = true,
-  $package_source = 'fhgfs',
-  $version        = 'fhgfs_2012.10'
+  $manage_repo    = $fhgfs::params::manage_repo,
+  $package_source = $fhgfs::params::package_source,
+  $version        = $fhgfs::params::version
 ) {
   anchor { 'fhgfs::repo::begin': }
   anchor { 'fhgfs::repo::end': }
 
   case $::osfamily {
-    'redhat': {
-      class { 'fhgfs::repo::redhat':
-        manage_repo    => $manage_repo,
-        require        => Anchor['fhgfs::repo::begin'],
-        before         => Anchor['fhgfs::repo::end'],
-      }
-    }
     'debian': {
       class { 'fhgfs::repo::debian':
         require        => Anchor['fhgfs::repo::begin'],

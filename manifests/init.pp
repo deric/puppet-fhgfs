@@ -36,36 +36,38 @@
 # Copyright 2013 Tomas Barton, unless otherwise noted.
 #
 class fhgfs {
-
+  $manage_repo                   = $fhgfs::params::manage_repo,
+  $mgmtd_host                    = $fhgfs::params::mgmtd_host,
+  $meta_directory                = $fhgfs::params::meta_directory,
+  $storage_directory             = $fhgfs::params::storage_directory,
+  $mgmtd_directory               = $fhgfs::params::mgmtd_directory,
+  $client_auto_remove_mins       = $fhgfs::params::client_auto_remove_mins,
+  $meta_space_low_limit          = $fhgfs::params::meta_space_low_limit,
+  $meta_space_emergency_limit    = $fhgfs::params::meta_space_emergency_limit,
+  $storage_space_low_limit       = $fhgfs::params::storage_space_low_limit,
+  $storage_space_emergency_limit = $fhgfs::params::storage_space_emergency_limit,
+  $version                       = $fhgfs::params::version,
+  $major_version                 = $fhgfs::params::major_version,
+  $package_source                = $fhgfs::params::package_source,
 ) inherits fhgfs::params {
 
 
   class { 'fhgfs::repo'
-    $manage_repo    = true,
-    $package_source = 'fhgfs',
-    $version        = 'fhgfs_2012.10'
-  }
-
-  case $major_version {
-    default: {
-      require yum::repo::fhgfs
-    }
-    '2011': {
-      require yum::repo::fhgfs
-    }
-    '2012': {
-      require yum::repo::fhgfs2012
-    }
+    manage_repo    => $manage_repo,
+    package_source => $package_source,
+    version        => $version,
   }
 
   package { 'fhgfs-utils':
-    ensure => $version,
+    ensure  => $version,
+    require => Class['fhgfs::repo']
   }
+
   file { '/etc/fhgfs/fhgfs-client.conf':
     require => Package['fhgfs-utils'],
     content => template('fhgfs/fhgfs-client.conf.erb'),
   }
-  
+
   # Allow the end user to establish relationships to the "main" class
   # and preserve the relationship to the implementation classes through
   # a transitive relationship to the composite class.
