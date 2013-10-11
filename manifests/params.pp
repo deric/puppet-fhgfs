@@ -14,7 +14,7 @@
 #
 # This class file is not called directly
 class fhgfs::params {
-  $manage_repo                   = true
+  $manage_repo                   = true,
   $mgmtd_host                    = 'localhost',
   $meta_directory                = '/meta',
   $storage_directory             = '/storage',

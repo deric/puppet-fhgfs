@@ -6,8 +6,7 @@ class fhgfs::repo::debian (
   $version        = $fhgfs::params::version,
 ) {
 
-
- $distro = downcase($::operatingsystem)
+# $distro = downcase($::operatingsystem)
 
   case $::operatingsystem {
     Debian: {
@@ -53,5 +52,4 @@ class fhgfs::repo::debian (
       before      => Anchor['fhgfs::apt_repo'],
     }
   }
-
 }
