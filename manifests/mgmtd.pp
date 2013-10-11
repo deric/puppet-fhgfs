@@ -13,8 +13,13 @@ class fhgfs::mgmtd (
   $version                       = $fhgfs::version,
 ) inherits fhgfs {
 
+  anchor{ 'fhgfs::mgmtd::begin':
+    require => Anchor['fhgfs::begin']
+  }
+
   package { 'fhgfs-mgmtd':
-    ensure => $version,
+    ensure  => $version,
+    require =>  Anchor['fhgfs::mgmtd::begin']
   }
 
   file { '/etc/fhgfs/fhgfs-mgmtd.conf':
