@@ -51,7 +51,7 @@ class fhgfs (
   $package_source                = $fhgfs::params::package_source,
 ) inherits fhgfs::params {
 
-  class { 'fhgfs::repo'
+  class { 'fhgfs::repo':
     manage_repo    => $manage_repo,
     package_source => $package_source,
     version        => $version,
