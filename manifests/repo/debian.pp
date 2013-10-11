@@ -50,12 +50,13 @@ class fhgfs::repo::debian (
     case $package_source {
       'fhgfs': {
         apt::source { 'fhgfs':
-          location   => "http://www.fhgfs.com/release/${version}",
-          repos      => 'non-free',
-          release    => "${release}",
-          key        => '64497785',
-          key_source => 'http://www.fhgfs.com/release/latest-stable/gpg/DEB-GPG-KEY-fhgfs',
-          notify     => Exec['apt_get_update_for_fhgfs'],
+          location    => "http://www.fhgfs.com/release/${version}",
+          repos       => 'non-free',
+          release     => "${release}",
+          key         => '64497785',
+          include_src => false,
+          key_source  => 'http://www.fhgfs.com/release/latest-stable/gpg/DEB-GPG-KEY-fhgfs',
+          notify      => Exec['apt_get_update_for_fhgfs'],
         }
       }
       default: {}
