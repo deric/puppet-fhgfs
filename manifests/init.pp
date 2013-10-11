@@ -35,7 +35,7 @@
 #
 # Copyright 2013 Tomas Barton, unless otherwise noted.
 #
-class fhgfs {
+class fhgfs (
   $manage_repo                   = $fhgfs::params::manage_repo,
   $mgmtd_host                    = $fhgfs::params::mgmtd_host,
   $meta_directory                = $fhgfs::params::meta_directory,
@@ -50,7 +50,6 @@ class fhgfs {
   $major_version                 = $fhgfs::params::major_version,
   $package_source                = $fhgfs::params::package_source,
 ) inherits fhgfs::params {
-
 
   class { 'fhgfs::repo'
     manage_repo    => $manage_repo,
