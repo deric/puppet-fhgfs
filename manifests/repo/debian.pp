@@ -2,8 +2,9 @@
 
 class fhgfs::repo::debian (
   $manage_repo    = true,
-  $package_source = $fhgfs::params::package_source,
-  $version        = $fhgfs::params::version,
+  $package_source = $fhgfs::package_source,
+  $package_ensure = $fhgfs::package_ensure,
+  $version        = $fhgfs::version,
 ) {
 
 # $distro = downcase($::operatingsystem)
@@ -33,11 +34,11 @@ class fhgfs::repo::debian (
       }
     }
     default: {
-      fail ("${$::operatingsystem} is not supported yet")
+      fail ("${::operatingsystem} is not supported yet")
     }
   }
 
-  package { $package_name:
+  package { 'fhgfs-utils':
     ensure  => $package_ensure,
     require => Anchor['fhgfs::apt_repo'],
   }
@@ -52,7 +53,7 @@ class fhgfs::repo::debian (
         apt::source { 'fhgfs':
           location    => "http://www.fhgfs.com/release/${version}",
           repos       => 'non-free',
-          release     => "${release}",
+          release     => $release,
           key         => '64497785',
           include_src => false,
           key_source  => 'http://www.fhgfs.com/release/latest-stable/gpg/DEB-GPG-KEY-fhgfs',

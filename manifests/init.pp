@@ -35,47 +35,20 @@
 #
 # Copyright 2013 Tomas Barton, unless otherwise noted.
 #
-class fhgfs (
-  $manage_repo                   = $fhgfs::params::manage_repo,
-  $mgmtd_host                    = $fhgfs::params::mgmtd_host,
-  $meta_directory                = $fhgfs::params::meta_directory,
-  $storage_directory             = $fhgfs::params::storage_directory,
-  $mgmtd_directory               = $fhgfs::params::mgmtd_directory,
-  $client_auto_remove_mins       = $fhgfs::params::client_auto_remove_mins,
-  $meta_space_low_limit          = $fhgfs::params::meta_space_low_limit,
-  $meta_space_emergency_limit    = $fhgfs::params::meta_space_emergency_limit,
-  $storage_space_low_limit       = $fhgfs::params::storage_space_low_limit,
-  $storage_space_emergency_limit = $fhgfs::params::storage_space_emergency_limit,
-  $version                       = $fhgfs::params::version,
-  $major_version                 = $fhgfs::params::major_version,
-  $package_source                = $fhgfs::params::package_source,
-) inherits fhgfs::params {
-
-  class { 'fhgfs::repo':
-    manage_repo    => $manage_repo,
-    package_source => $package_source,
-    version        => $version,
-  }
-
-  package { 'fhgfs-utils':
-    ensure  => $version,
-    require => Class['fhgfs::repo']
-  }
-
-  file { '/etc/fhgfs/fhgfs-client.conf':
-    require => Package['fhgfs-utils'],
-    content => template('fhgfs/fhgfs-client.conf.erb'),
-  }
-
-  # Allow the end user to establish relationships to the "main" class
-  # and preserve the relationship to the implementation classes through
-  # a transitive relationship to the composite class.
-  #anchor{ 'fhgfs::begin':
-  #  before => Class['fhgfs::repo'],
-  #  notify => Class['fhgfs::service'],
-  #}
-  #anchor { 'fhgfs::end':
-  #  require => Class['fhgfs::service'],
-  #}
-
+class fhgfs {
+  $manage_repo                   = true
+  $mgmtd_host                    = 'localhost'
+  $meta_directory                = '/meta'
+  $storage_directory             = '/storage'
+  $mgmtd_directory               = '/mgmtd'
+  $client_auto_remove_mins       = 0
+  $meta_space_low_limit          = '5G'
+  $meta_space_emergency_limit    = '3G'
+  $storage_space_low_limit       = '100G'
+  $storage_space_emergency_limit = '10G'
+  $version                       = 'fhgfs_2012.10'
+  $major_version                 = '2012'
+  $package_source                = 'fhgfs'
+  $package_ensure                = 'present'
 }
+

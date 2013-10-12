@@ -11,15 +11,12 @@ class fhgfs::mgmtd (
   $storage_space_low_limit       = $fhgfs::storage_space_low_limit,
   $storage_space_emergency_limit = $fhgfs::storage_space_emergency_limit,
   $version                       = $fhgfs::version,
-) inherits fhgfs {
+  ){
 
-  anchor{ 'fhgfs::mgmtd::begin':
-    require => Anchor['fhgfs::begin']
-  }
+  require fhgfs::install
 
   package { 'fhgfs-mgmtd':
     ensure  => $version,
-    require =>  Anchor['fhgfs::mgmtd::begin']
   }
 
   file { '/etc/fhgfs/fhgfs-mgmtd.conf':

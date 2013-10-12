@@ -26,7 +26,7 @@ connBacklogTCP                 = 128
 connInterfacesFile             =
 connNetFilterFile              =
 
-storeMgmtdDirectory            = <%= mgmtd_directory %>
+storeMgmtdDirectory            = <%= scope.lookupvar('fhgfs::mgmtd_directory') %>
 storeAllowFirstRunInit         = true
 
 tuneNumWorkers                 = 4

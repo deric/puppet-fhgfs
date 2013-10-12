@@ -22,7 +22,7 @@ class fhgfs::repo(
   anchor { 'fhgfs::repo::end': }
 
   case $::osfamily {
-    'debian': {
+    Debian: {
       class { 'fhgfs::repo::debian':
         require        => Anchor['fhgfs::repo::begin'],
         before         => Anchor['fhgfs::repo::end'],
