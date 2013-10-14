@@ -18,12 +18,12 @@ class fhgfs::meta (
   }
 
   file { '/etc/fhgfs/fhgfs-meta.conf':
-    require => Package['fhgfs-meta'],
     ensure  => 'present',
     owner   => $user,
     group   => $group,
     mode    => '0755',
     content => template('fhgfs/fhgfs-meta.conf.erb'),
+    require => Package['fhgfs-meta'],
   }
 
   service { 'fhgfs-meta':

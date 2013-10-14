@@ -27,12 +27,12 @@ class fhgfs::client (
     require  => Package['fhgfs-helperd'],
   }
   file { '/etc/fhgfs/fhgfs-mounts.conf':
-    require => Package['fhgfs-client'],
     ensure  => present,
     owner   => $user,
     group   => $group,
     mode    => '0755',
     source  => $mounts,
+    require => Package['fhgfs-client'],
   }
 
   service { 'fhgfs-client':

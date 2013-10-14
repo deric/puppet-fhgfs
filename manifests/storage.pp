@@ -25,12 +25,12 @@ class fhgfs::storage (
   }
 
   file { '/etc/fhgfs/fhgfs-storage.conf':
-    require => Package['fhgfs-storage'],
     ensure  => present,
     owner   => $user,
     group   => $group,
     mode    => '0755',
     content => template('fhgfs/fhgfs-storage.conf.erb'),
+    require => Package['fhgfs-storage'],
   }
 
   service { 'fhgfs-storage':
