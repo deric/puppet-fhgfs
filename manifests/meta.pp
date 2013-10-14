@@ -3,11 +3,13 @@
 # This module manages FhGFS client
 #
 class fhgfs::meta (
-  $enable         = false,
-  $meta_directory = $fhgfs::params::meta_directory,
-  $mgmtd_host     = $fhgfs::params::mgmtd_host,
-  $version        = $fhgfs::params::version,
+  $enable         = true,
+  $meta_directory = $fhgfs::meta_directory,
+  $mgmtd_host     = $fhgfs::mgmtd_host,
+  $version        = $fhgfs::version,
 ) inherits fhgfs {
+
+  require fhgfs::install
 
   package { 'fhgfs-meta':
     ensure => $version,
