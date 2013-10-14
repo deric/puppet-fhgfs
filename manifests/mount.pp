@@ -2,13 +2,20 @@
 #
 # This module manages FhGFS client
 #
-define fhgfs::mount ($cfg, $mnt, $subdir = '') {
+define fhgfs::mount (
+  $cfg,
+  $mnt,
+  $subdir = ''
+  $user   = $fhgfs::user,
+  $group  = $fhgfs::group,
+) {
+
   include fhgfs::client
 
   file { $mnt:
     ensure  => directory,
-    owner   => root,
-    group   => root,
+    owner   => $user,
+    group   => $group,
     mode    => '0755',
   }
 

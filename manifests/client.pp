@@ -3,9 +3,13 @@
 # This module manages FhGFS client
 #
 class fhgfs::client (
-  $version = $fhgfs::params::version,
+  $version = $fhgfs::version,
   $mounts  = 'puppet:///private/fhgfs/fhgfs-mounts.conf',
+  $user    = $fhgfs::user,
+  $group   = $fhgfs::group,
 ) inherits fhgfs {
+
+  require fhgfs::install
 
   package { 'kernel-devel' :
     ensure   => present,
@@ -24,8 +28,13 @@ class fhgfs::client (
   }
   file { '/etc/fhgfs/fhgfs-mounts.conf':
     require => Package['fhgfs-client'],
+    ensure  => present,
+    owner   => $user,
+    group   => $group,
+    mode    => '0755',
     source  => $mounts,
   }
+
   service { 'fhgfs-client':
     enable   => true,
     require  => [ Package['fhgfs-client'], Service['fhgfs-helperd'],

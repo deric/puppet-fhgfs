@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'fhgfs::meta' do
-  shared_examples 'debian-mgmtd' do |os, codename|
+  shared_examples 'debian-meta' do |os, codename|
     let(:facts) {{
       :operatingsystem => os,
       :osfamily => 'Debian',
@@ -32,9 +32,9 @@ describe 'fhgfs::meta' do
     let(:user) { 'fhgfs' }
     let(:group) { 'fhgfs' }
 
-    it_behaves_like 'debian-mgmtd', 'Debian', 'squeeze'
-    it_behaves_like 'debian-mgmtd', 'Debian', 'wheezy'
-    it_behaves_like 'debian-mgmtd', 'Ubuntu', 'precise'
+    it_behaves_like 'debian-meta', 'Debian', 'squeeze'
+    it_behaves_like 'debian-meta', 'Debian', 'wheezy'
+    it_behaves_like 'debian-meta', 'Ubuntu', 'precise'
   end
 
 end
