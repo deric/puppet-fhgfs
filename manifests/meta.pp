@@ -1,12 +1,13 @@
-# Class: fhgfs::client
+# Class: fhgfs::meta
 #
-# This module manages FhGFS client
+# This module manages FhGFS meta service
 #
 class fhgfs::meta (
   $enable         = true,
   $meta_directory = $fhgfs::meta_directory,
   $mgmtd_host     = $fhgfs::mgmtd_host,
   $version        = $fhgfs::version,
+  $log_dir        = $fhgfs::log_dir,
   $user           = $fhgfs::user,
   $group          = $fhgfs::group,
 ) inherits fhgfs {

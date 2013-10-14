@@ -10,12 +10,12 @@
 
 
 #
-# --- Section 1: [Settings] --- 
+# --- Section 1: [Settings] ---
 #
 
 logLevel               = 3
 logNoDate              = false
-logStdFile             = /var/log/fhgfs-storage.log
+logStdFile             = <%= scope.lookupvar('fhgfs::storage::log_dir') %>/storage.log
 logNumLines            = 50000
 logNumRotatedFiles     = 5
 
@@ -27,10 +27,10 @@ connStoragePortTCP     = 8003
 connUseSDP             = false
 connUseRDMA            = true
 connBacklogTCP         = 128
-connInterfacesFile     = 
+connInterfacesFile     =
 connNetFilterFile      =
 
-storeStorageDirectory  = <%= storage_directory %>
+storeStorageDirectory  = <%= scope.lookupvar('fhgfs::storage::storage_directory') %>
 storeAllowFirstRunInit = true
 
 tuneNumWorkers         = 8
@@ -38,7 +38,7 @@ tuneWorkerBufSize      = 4m
 tuneFileReadSize       = 32k
 tuneFileWriteSize      = 64k
 
-sysMgmtdHost           = <%= mgmtd_host %>
+sysMgmtdHost           = <%= scope.lookupvar('fhgfs::storage::mgmtd_host') %>
 
 runDaemonized          = true
 
@@ -67,7 +67,7 @@ runDaemonized          = true
 # [logNoDate]
 # Defines whether "date & time" (=false) or the current "time only" (=true)
 # should be logged.
-# Default: false 
+# Default: false
 
 # [logStdFile]
 # The path and filename of the log file for standard log messages. If no name
@@ -91,7 +91,7 @@ runDaemonized          = true
 # [connPortShift]
 # Shifts all following UDP and TCP ports according to the specified value.
 # Intended to make port configuration easier in case you do not want to
-# configure each port individually.  
+# configure each port individually.
 # Default: 0
 
 # [connMgmtdPortUDP], [connMgmtdPortTCP]
@@ -123,7 +123,7 @@ runDaemonized          = true
 # may be used for communication. One interface per line. The line number also
 # defines the priority of the interface.
 # Example: "ib0" in the first line, "eth0" in the second line.
-# Values: This setting is optional. If unspecified, all available interfaces 
+# Values: This setting is optional. If unspecified, all available interfaces
 #    will be used and priorities will be assigned automatically.
 # Note: This has no influence on outgoing connections. The information is sent
 #    to other hosts to inform them about possible communication paths.
@@ -135,7 +135,7 @@ runDaemonized          = true
 # address and number of significant bits).
 # Example: "192.168.10.0/24" in the first line, "192.168.20.0/24" in the second
 #    line.
-# Values: This setting is optional. If unspecified, all addresses are allowed 
+# Values: This setting is optional. If unspecified, all addresses are allowed
 #    for outgoing communication.
 # Default: <none>
 
@@ -145,8 +145,8 @@ runDaemonized          = true
 #
 
 # [storeStorageDirectory]
-# The absoute path to a storage target. A storage target is a directory where 
-# the file system can store raw user file contents. Multiple targets can be 
+# The absoute path to a storage target. A storage target is a directory where
+# the file system can store raw user file contents. Multiple targets can be
 # specified as a comma-separated list.
 # Example: /mnt/fhgfs_storage1,/mnt/fhgfs_storage2
 # Default: <none>
@@ -167,7 +167,7 @@ runDaemonized          = true
 # [tuneNumWorkers]
 # The number of worker threads. Should be at least 3. Higher number of workers
 # allows the server to handle more client requests in parallel, which also
-# results in more concurrent access to the underlying storage device. 
+# results in more concurrent access to the underlying storage device.
 # Default: 8
 
 # [tuneWorkerBufSize]
@@ -180,7 +180,7 @@ runDaemonized          = true
 # [tuneFileReadSize], [tuneFileWriteSize]
 # The maximum amount of data that the server should write to (or read from)
 # the underlying local file system in a single operation.
-# Note: Setting these values higher than the file chunk size or 
+# Note: Setting these values higher than the file chunk size or
 #    tuneWorkerBufSize has no effect.
 # Default: tuneFileReadSize=32k, tuneFileWriteSize=64k
 

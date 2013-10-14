@@ -1,6 +1,6 @@
 # Class: fhgfs::client
 #
-# This module manages FhGFS client
+# This module manages FhGFS mgmtd
 #
 class fhgfs::mgmtd (
   $enable                        = true,

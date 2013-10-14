@@ -1,5 +1,7 @@
-# puppet config
-
+# Class: fhgfs::install
+#
+# This module manages FhGFS basic packages installation
+#
 class fhgfs::install(
   $manage_repo    = $fhgfs::manage_repo,
   $package_source = $fhgfs::package_source,

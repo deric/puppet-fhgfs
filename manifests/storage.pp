@@ -1,12 +1,13 @@
-# Class: fhgfs::client
+# Class: fhgfs::storage
 #
-# This module manages FhGFS client
+# This module manages FhGFS storage service
 #
 class fhgfs::storage (
   $enable            = true,
   $storage_directory = $fhgfs::storage_directory,
   $mgmtd_host        = $fhgfs::mgmtd_host,
   $version           = $fhgfs::version,
+  $log_dir           = $fhgfs::log_dir,
   $user              = $fhgfs::user,
   $group             = $fhgfs::group,
 ) inherits fhgfs {

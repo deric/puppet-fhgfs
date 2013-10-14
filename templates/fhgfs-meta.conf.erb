@@ -10,12 +10,12 @@
 
 
 #
-# --- Section 1: [Settings] --- 
+# --- Section 1: [Settings] ---
 #
 
 logLevel                  = 3
 logNoDate                 = false
-logStdFile                = /var/log/fhgfs-meta.log
+logStdFile                = <%= scope.lookupvar('fhgfs::meta::log_dir') %>/meta.log
 logNumLines               = 50000
 logNumRotatedFiles        = 5
 
@@ -28,18 +28,18 @@ connUseSDP                = false
 connUseRDMA               = true
 connBacklogTCP            = 128
 connMaxInternodeNum       = 32
-connInterfacesFile        = 
+connInterfacesFile        =
 connNetFilterFile         =
 connNonPrimaryExpiration  = 10000
 
-storeMetaDirectory        = <%= meta_directory %>
+storeMetaDirectory        = <%= scope.lookupvar('fhgfs::meta::meta_directory') %>
 storeAllowFirstRunInit    = true
 storeUseExtendedAttribs   = true
 
 tuneNumWorkers            = 0
 tuneTargetChooser         = randomized
 
-sysMgmtdHost              = <%= mgmtd_host %>
+sysMgmtdHost              = <%= scope.lookupvar('fhgfs::meta::mgmtd_host') %>
 
 runDaemonized             = true
 
@@ -67,7 +67,7 @@ runDaemonized             = true
 # [logNoDate]
 # Defines whether "date & time" (=false) or the current "time only" (=true)
 # should be logged.
-# Default: false 
+# Default: false
 
 # [logStdFile]
 # The path and filename of the log file for standard log messages. If no name
@@ -91,7 +91,7 @@ runDaemonized             = true
 # [connPortShift]
 # Shifts all following UDP and TCP ports according to the specified value.
 # Intended to make port configuration easier in case you do not want to
-# configure each port individually.  
+# configure each port individually.
 # Default: 0
 
 # [connMgmtdPortUDP], [connMgmtdPortTCP]
@@ -150,7 +150,7 @@ runDaemonized             = true
 # interface again if necessary).
 # Values: Set to 0 to disable expiration.
 # Note: The priority of node interfaces can be configured with the
-#    "connInterfacesFile" parameter. 
+#    "connInterfacesFile" parameter.
 # Default: 10000
 
 
@@ -173,7 +173,7 @@ runDaemonized             = true
 
 # [storeUseExtendedAttribs]
 # Controles whether metadata is stored as normal file contents (=false) or as
-# extended attributes (=true). Depending on the type and version of your 
+# extended attributes (=true). Depending on the type and version of your
 # underlying local file system, extended attributes typically are significantly
 # faster, but they are also more difficult to backup.
 # Note: This setting can only be configured at first startup and cannot be
@@ -195,7 +195,7 @@ runDaemonized             = true
 # The algorithm to choose storage targets for file creation.
 # Values: "randomized" (choose targets in a randomized fashion), "roundrobin"
 #	  (choose targets in a deterministic round-robin fashion).
-# Note: The round-robin chooser does not honor client's preferred nodes 
+# Note: The round-robin chooser does not honor client's preferred nodes
 #    settings and has some other minor disadvantages. It should currently not
 #    be used for production workloads.
 # Default: randomized

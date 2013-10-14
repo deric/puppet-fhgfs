@@ -1,6 +1,6 @@
-# Define: fhgfs::client
+# Define: fhgfs::mount
 #
-# This module manages FhGFS client
+# This module manages FhGFS mounts
 #
 define fhgfs::mount (
   $cfg,
