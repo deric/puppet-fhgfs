@@ -4,7 +4,7 @@ class fhgfs::repo::debian (
   $manage_repo    = true,
   $package_source = $fhgfs::package_source,
   $package_ensure = $fhgfs::package_ensure,
-  $version        = $fhgfs::version,
+  $major_version  = $fhgfs::major_version,
 ) {
 
 # $distro = downcase($::operatingsystem)
@@ -51,7 +51,7 @@ class fhgfs::repo::debian (
     case $package_source {
       'fhgfs': {
         apt::source { 'fhgfs':
-          location    => "http://www.fhgfs.com/release/${version}",
+          location    => "http://www.fhgfs.com/release/${major_version}",
           repos       => 'non-free',
           release     => $release,
           key         => '64497785',

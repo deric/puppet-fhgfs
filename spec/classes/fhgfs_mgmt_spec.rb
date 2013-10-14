@@ -12,7 +12,6 @@ describe 'fhgfs::mgmtd' do
     it { should contain_package('fhgfs-utils') }
 
     it { should include_class('fhgfs::repo::debian') }
-    it { should contain_file('/etc/apt/sources.list.d/fhgfs.list') }
 
     it { should contain_service('fhgfs-mgmtd').with(
         :ensure => 'running',
@@ -24,8 +23,8 @@ describe 'fhgfs::mgmtd' do
 
   context 'on debian-like system' do
     it_behaves_like 'debian-client', 'Debian', 'squeeze'
-    #it_behaves_like 'debian-client', 'Debian', 'wheezy'
-    #it_behaves_like 'debian-client', 'Ubuntu', 'precise'
+    it_behaves_like 'debian-client', 'Debian', 'wheezy'
+    it_behaves_like 'debian-client', 'Ubuntu', 'precise'
   end
 
 end

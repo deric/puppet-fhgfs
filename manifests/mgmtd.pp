@@ -40,6 +40,8 @@ class fhgfs::mgmtd (
 
   file { '/etc/fhgfs/fhgfs-mgmtd.conf':
     require => Package['fhgfs-mgmtd'],
+    owner   => $user,
+    group   => $group,
     content => template('fhgfs/fhgfs-mgmtd.conf.erb'),
   }
 

@@ -46,7 +46,7 @@ class fhgfs {
   $storage_space_low_limit       = '100G'
   $storage_space_emergency_limit = '10G'
   $version                       = '2012.10.r8.debian7'
-  $major_version                 = '2012'
+  $major_version                 = 'fhgfs_2012.10'
   $package_source                = 'fhgfs'
   $package_ensure                = 'present'
   $log_dir                       = '/var/log/fhgfs'

@@ -36,6 +36,10 @@ class fhgfs::install(
   }
 
   file { '/etc/fhgfs/fhgfs-client.conf':
+    ensure  => present,
+    owner   => $user,
+    group   => $group,
+    mode    => '0755',
     require => Package['fhgfs-utils'],
     content => template('fhgfs/fhgfs-client.conf.erb'),
   }
