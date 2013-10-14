@@ -8,9 +8,6 @@ describe 'fhgfs::install' do
       :lsbdistcodename => codename,
     }}
 
-    user = 'fhgfs'
-    group = 'fhgfs'
-
     it { should include_class('fhgfs::repo') }
 
     it { should contain_file('/etc/fhgfs/fhgfs-client.conf').with({
@@ -24,6 +21,9 @@ describe 'fhgfs::install' do
   end
 
   context 'on debian-like system' do
+    let(:user) { 'fhgfs' }
+    let(:group) { 'fhgfs' }
+
     it_behaves_like 'debian-install', 'Debian', 'squeeze'
     it_behaves_like 'debian-install', 'Debian', 'wheezy'
     it_behaves_like 'debian-install', 'Ubuntu', 'precise'
