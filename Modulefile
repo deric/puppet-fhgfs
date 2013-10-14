@@ -9,3 +9,4 @@ project_page 'https://github.com/deric/puppet-fhgfs'
 
 ## Add dependencies, if any:
 # dependency 'username/name', '>= 1.2.0'
+dependency 'puppetlabs/apt', '>= 1.0.0'
