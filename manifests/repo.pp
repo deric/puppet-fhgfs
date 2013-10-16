@@ -14,9 +14,9 @@
 #
 # This class file is not called directly
 class fhgfs::repo(
-  $manage_repo    = $fhgfs::params::manage_repo,
-  $package_source = $fhgfs::params::package_source,
-  $version        = $fhgfs::params::version
+  $manage_repo    = $fhgfs::manage_repo,
+  $package_source = $fhgfs::package_source,
+  $version        = $fhgfs::version
 ) {
   anchor { 'fhgfs::repo::begin': }
   anchor { 'fhgfs::repo::end': }

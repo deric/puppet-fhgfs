@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe 'fhgfs::meta' do
+  let(:facts) {{
+    :operatingsystem => 'Debian',
+    :osfamily => 'Debian',
+    :lsbdistcodename => 'wheezy',
+  }}
+
+
   shared_examples 'debian-meta' do |os, codename|
     let(:facts) {{
       :operatingsystem => os,
@@ -32,9 +39,21 @@ describe 'fhgfs::meta' do
     let(:user) { 'fhgfs' }
     let(:group) { 'fhgfs' }
 
-    it_behaves_like 'debian-meta', 'Debian', 'squeeze'
+    #it_behaves_like 'debian-meta', 'Debian', 'squeeze'
     it_behaves_like 'debian-meta', 'Debian', 'wheezy'
-    it_behaves_like 'debian-meta', 'Ubuntu', 'precise'
+    #it_behaves_like 'debian-meta', 'Ubuntu', 'precise'
+  end
+
+  context 'allow changing parameters' do
+    let(:params){{
+        :mgmtd_host => '192.168.1.1'
+    }}
+
+    it {
+      should contain_file(
+        '/etc/fhgfs/fhgfs-meta.conf'
+      ).with_content(/192.168.1.1/)
+    }
   end
 
 end

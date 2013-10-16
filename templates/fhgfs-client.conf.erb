@@ -10,7 +10,7 @@
 
 
 #
-# --- Section 1: [Settings] --- 
+# --- Section 1: [Settings] ---
 #
 
 logLevel                      = 3
@@ -39,7 +39,7 @@ tuneFileCacheType             = buffered
 tuneRemoteFSync               = true
 tuneUseGlobalFileLocks        = false
 
-sysMgmtdHost                  = <%= @mgmtd_host %>
+sysMgmtdHost                  = <%= scope.lookupvar('fhgfs::mgmtd_host') %>
 sysCreateHardlinksAsSymlinks  = true
 sysMountSanityCheckMS         = 0
 
@@ -78,8 +78,8 @@ sysMountSanityCheckMS         = 0
 # Defines whether the ClientID should appear in each log line. This usually
 # makes sense only if you use remote logging and want to use the same
 # fhgfs_helperd instance for multiple clients.
-# Note: Use "logHelperdIP" to enable remote logging. 
-# Default: false 
+# Note: Use "logHelperdIP" to enable remote logging.
+# Default: false
 
 # [logHelperdIP]
 # Defines the IP address of the node on which the fhgfs_helperd runs for
@@ -97,7 +97,7 @@ sysMountSanityCheckMS         = 0
 # [connPortShift]
 # Shifts all following UDP and TCP ports according to the specified value.
 # Intended to make port configuration easier in case you do not want to
-# configure each port individually.  
+# configure each port individually.
 # Default: 0
 
 # [connMgmtdPortUDP], [connMgmtdPortTCP]
@@ -170,7 +170,7 @@ sysMountSanityCheckMS         = 0
 # interface again if necessary).
 # Note: Set this value to 0 to disable expiration.
 # Note: The priority of node interfaces can be configured using the
-#    "connInterfacesFile" parameter. 
+#    "connInterfacesFile" parameter.
 # Default: 10000
 
 # [connCommRetrySecs]
@@ -219,7 +219,7 @@ sysMountSanityCheckMS         = 0
 
 # [tuneRemoteFSync]
 # Controls whether fsync() syscalls from a user application should only be
-# executed on the client to transfer data from the client cache to server 
+# executed on the client to transfer data from the client cache to server
 # cache (=false); or also on the servers to flush the server's cached file
 # data to the disks (=true).
 # Default: true
@@ -248,6 +248,6 @@ sysMountSanityCheckMS         = 0
 # and storage servers are reachable). Mounting will fail if a problem is
 # detected.
 # Values: Set the time (in ms) you want to spend waiting for the servers
-# (especially the management daemon) to respond. Use 0 to disable all checks 
+# (especially the management daemon) to respond. Use 0 to disable all checks
 # and allow mounting even if no servers are reachable.
 # Default: 3000
