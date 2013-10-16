@@ -3,4 +3,5 @@
 *.log
 *.tmp
 spec/fixtures/modules/*
+pkg/*
 
