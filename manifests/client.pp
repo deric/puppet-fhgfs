@@ -11,15 +11,32 @@ class fhgfs::client (
 
   require fhgfs::install
 
-  package { 'kernel-devel' :
-    ensure   => present,
+  anchor { 'fhgfs::kernel_dev' : }
+
+  case $::osfamily {
+    Debian: {
+      package { 'kernel-package' :
+        ensure => present,
+        before => Anchor['fhgfs::kernel_dev']
+      }
+    }
+    RedHat: {
+      package { 'kernel-devel' :
+        ensure => present,
+        before => Anchor['fhgfs::kernel_dev']
+      }
+    }
+    default: {
+      fail("OS Family '${::osfamily}' is not supported yet")
+    }
   }
+
   package { 'fhgfs-helperd':
     ensure   => $version,
   }
   package { 'fhgfs-client':
     ensure   => $version,
-    require  => Package['kernel-devel'],
+    require  => Anchor['fhgfs::kernel_dev'],
   }
   service { 'fhgfs-helperd':
     ensure   => running,
@@ -36,9 +53,13 @@ class fhgfs::client (
   }
 
   service { 'fhgfs-client':
-    enable   => true,
-    require  => [ Package['fhgfs-client'], Service['fhgfs-helperd'],
-                  File['/etc/fhgfs/fhgfs-mounts.conf']
-              ],
+    enable     => true,
+    hasstatus  => true,
+    hasrestart => true,
+    require    => [
+      Package['fhgfs-client'],
+      Service['fhgfs-helperd'],
+      File['/etc/fhgfs/fhgfs-mounts.conf']
+    ],
   }
 }
