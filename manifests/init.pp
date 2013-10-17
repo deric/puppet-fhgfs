@@ -9,26 +9,30 @@
 # Copyright 2013 Tomas Barton, unless otherwise noted.
 #
 class fhgfs {
-  $manage_repo                   = true
-  $mgmtd_host                    = 'localhost'
-  $meta_directory                = '/meta'
-  $storage_directory             = '/storage'
-  $client_auto_remove_mins       = 0
-  $meta_space_low_limit          = '5G'
-  $meta_space_emergency_limit    = '3G'
-  $storage_space_low_limit       = '100G'
-  $storage_space_emergency_limit = '10G'
-  $package_source                = 'fhgfs'
-  $package_ensure                = 'present'
-  $log_dir                       = '/var/log/fhgfs'
-  $user                          = 'fhgfs'
-  $group                         = 'fhgfs'
+  $manage_repo                   = hiera('fhgfs::manage_repo', true)
+  $mgmtd_host                    = hiera('fhgfs::mgmtd_host', 'localhost')
+  $meta_directory                = hiera('fhgfs::meta_directory', '/meta')
+  $storage_directory             = hiera('fhgfs::storage_directory', '/storage')
+  $client_auto_remove_mins       = hiera('fhgfs::client_auto_remove_mins', 0)
+  $meta_space_low_limit          = hiera('fhgfs::meta_space_low_limit', '5G')
+  $meta_space_emergency_limit    = hiera('fhgfs::meta_space_emergency_limit', '3G')
+  $storage_space_low_limit       = hiera('fhgfs::storage_space_low_limit', '100G')
+  $storage_space_emergency_limit = hiera('fhgfs::storage_space_emergency_limit', '10G')
+  $package_source                = hiera('fhgfs::package_source', 'fhgfs')
+  $package_ensure                = hiera('fhgfs::package_ensure', 'present')
+  $log_dir                       = hiera('fhgfs::log_dir', '/var/log/fhgfs')
+  $user                          = hiera('fhgfs::user', 'fhgfs')
+  $group                         = hiera('fhgfs::group','fhgfs')
 
 
   case $::osfamily {
     Debian: {
-      $version                   = '2012.10.r8.debian7'
-      $major_version             = 'fhgfs_2012.10'
+      $version       = hiera('fhgfs::version','2012.10.r8.debian7')
+      $major_version = hiera('fhgfs::major_version','fhgfs_2012.10')
+    }
+    default: {
+      $version       = hiera('fhgfs::version','2012.10')
+      $major_version = hiera('fhgfs::major_version','fhgfs_2012.10')
     }
   }
 }
