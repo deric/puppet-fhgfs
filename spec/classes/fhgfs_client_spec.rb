@@ -8,7 +8,7 @@ describe 'fhgfs::client' do
       :lsbdistcodename => codename,
     }}
     it { should contain_package('fhgfs-client') }
-    it { should contain_package('kernel-devel') }
+    it { should contain_package('kernel-package') }
     it { should contain_package('fhgfs-helperd') }
     it { should contain_package('fhgfs-client') }
 
@@ -34,6 +34,16 @@ describe 'fhgfs::client' do
     it_behaves_like 'debian_fhgfs-client', 'Debian', 'squeeze'
     it_behaves_like 'debian_fhgfs-client', 'Debian', 'wheezy'
     it_behaves_like 'debian_fhgfs-client', 'Ubuntu', 'precise'
+  end
+
+  context 'on RedHat' do
+    let(:facts) {{
+      :operatingsystem => 'RedHat',
+      :osfamily => 'RedHat',
+      :lsbdistcodename => '6',
+    }}
+
+    it { should contain_package('kernel-devel') }
   end
 
 end

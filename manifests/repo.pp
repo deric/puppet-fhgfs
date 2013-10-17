@@ -28,6 +28,12 @@ class fhgfs::repo(
         before         => Anchor['fhgfs::repo::end'],
       }
     }
+    RedHat: {
+      class { 'fhgfs::repo::redhat':
+        require        => Anchor['fhgfs::repo::begin'],
+        before         => Anchor['fhgfs::repo::end'],
+      }
+    }
     default: {
       fail("Module '${module_name}' is not supported on OS: '${::operatingsystem}', family: '${::osfamily}'")
     }
