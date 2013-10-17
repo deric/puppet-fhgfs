@@ -21,9 +21,9 @@ describe 'fhgfs::mgmtd' do
   end
 
   context 'on debian-like system' do
-    it_behaves_like 'debian-mgmtd', 'Debian', 'squeeze'
+    #it_behaves_like 'debian-mgmtd', 'Debian', 'squeeze'
     it_behaves_like 'debian-mgmtd', 'Debian', 'wheezy'
-    it_behaves_like 'debian-mgmtd', 'Ubuntu', 'precise'
+    #it_behaves_like 'debian-mgmtd', 'Ubuntu', 'precise'
   end
 
 end

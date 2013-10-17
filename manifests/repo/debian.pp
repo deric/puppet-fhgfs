@@ -19,7 +19,7 @@ class fhgfs::repo::debian (
           $release = 'deb6'
         }
         default: {
-          fail ("${::lsbdistcodename} is not supported yet")
+          fail ("Family: '${::osfamily}' OS: '${::operatingsystem}' release: '${::lsbdistcodename}' is not supported yet")
         }
       }
     }
@@ -29,12 +29,12 @@ class fhgfs::repo::debian (
           $release = 'deb7'
         }
         default: {
-          fail ("${::lsbdistcodename} is not supported yet")
+          fail ("Family: '${::osfamily}' OS: '${::operatingsystem}' release: ${::lsbdistcodename} is not supported yet")
         }
       }
     }
     default: {
-      fail ("${::operatingsystem} is not supported yet")
+      fail ("Family: '${::osfamily}' OS: '${::operatingsystem}' is not supported yet")
     }
   }
 

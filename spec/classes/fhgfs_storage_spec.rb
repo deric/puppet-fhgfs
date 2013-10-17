@@ -38,9 +38,9 @@ describe 'fhgfs::storage' do
 
     let('fhgfs::storage_directory') { '/storage' }
 
-    it_behaves_like 'debian-storage', 'Debian', 'squeeze'
+    #it_behaves_like 'debian-storage', 'Debian', 'squeeze'
     it_behaves_like 'debian-storage', 'Debian', 'wheezy'
-    it_behaves_like 'debian-storage', 'Ubuntu', 'precise'
+    #it_behaves_like 'debian-storage', 'Ubuntu', 'precise'
   end
 
 end

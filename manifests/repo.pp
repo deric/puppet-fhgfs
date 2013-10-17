@@ -17,7 +17,7 @@ class fhgfs::repo(
   $manage_repo    = $fhgfs::manage_repo,
   $package_source = $fhgfs::package_source,
   $version        = $fhgfs::version
-) {
+) inherits fhgfs {
   anchor { 'fhgfs::repo::begin': }
   anchor { 'fhgfs::repo::end': }
 
@@ -29,7 +29,7 @@ class fhgfs::repo(
       }
     }
     default: {
-        fail("Module ${module_name} is not supported on ${::operatingsystem}")
+      fail("Module '${module_name}' is not supported on OS: '${::operatingsystem}', family: '${::osfamily}'")
     }
   }
 }
