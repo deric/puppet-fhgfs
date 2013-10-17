@@ -4,7 +4,6 @@
 #
 class fhgfs::client (
   $version = $fhgfs::version,
-  $mounts  = 'puppet:///private/fhgfs/fhgfs-mounts.conf',
   $user    = $fhgfs::user,
   $group   = $fhgfs::group,
 ) inherits fhgfs {
@@ -48,7 +47,6 @@ class fhgfs::client (
     owner   => $user,
     group   => $group,
     mode    => '0755',
-    source  => $mounts,
     require => Package['fhgfs-client'],
   }
 
