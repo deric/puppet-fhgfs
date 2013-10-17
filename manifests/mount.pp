@@ -5,7 +5,7 @@
 define fhgfs::mount (
   $cfg,
   $mnt,
-  $subdir = ''
+  $subdir = '',
   $user   = $fhgfs::user,
   $group  = $fhgfs::group,
 ) {
