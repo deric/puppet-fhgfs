@@ -40,7 +40,23 @@ describe 'fhgfs::storage' do
 
     #it_behaves_like 'debian-storage', 'Debian', 'squeeze'
     it_behaves_like 'debian-storage', 'Debian', 'wheezy'
-    #it_behaves_like 'debian-storage', 'Ubuntu', 'precise'
+    it_behaves_like 'debian-storage', 'Ubuntu', 'precise'
+  end
+
+  context 'with given version' do
+    let(:facts) {{
+      :operatingsystem => 'Debian',
+      :osfamily => 'Debian',
+      :lsbdistcodename => 'wheezy',
+    }}
+    let(:version) { '2012.10.r8.debian7' }
+    let(:params) {{
+      :package_ensure => version
+    }}
+
+    it { should contain_package('fhgfs-storage').with({
+      'ensure' => version
+    }) }
   end
 
 end

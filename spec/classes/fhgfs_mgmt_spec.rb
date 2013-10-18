@@ -16,14 +16,27 @@ describe 'fhgfs::mgmtd' do
         :ensure => 'running',
         :enable => true
     ) }
-
-
   end
 
   context 'on debian-like system' do
-    #it_behaves_like 'debian-mgmtd', 'Debian', 'squeeze'
     it_behaves_like 'debian-mgmtd', 'Debian', 'wheezy'
-    #it_behaves_like 'debian-mgmtd', 'Ubuntu', 'precise'
+    it_behaves_like 'debian-mgmtd', 'Ubuntu', 'precise'
+  end
+
+  context 'with given version' do
+    let(:facts) {{
+      :operatingsystem => 'Debian',
+      :osfamily => 'Debian',
+      :lsbdistcodename => 'wheezy',
+    }}
+    let(:version) { '2012.10.r8.debian7' }
+    let(:params) {{
+      :package_ensure => version
+    }}
+
+    it { should contain_package('fhgfs-mgmtd').with({
+      'ensure' => version
+    }) }
   end
 
 end

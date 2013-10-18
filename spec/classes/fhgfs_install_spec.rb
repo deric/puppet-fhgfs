@@ -10,6 +10,9 @@ describe 'fhgfs::install' do
 
     it { should include_class('fhgfs::repo') }
 
+    it { should contain_user('fhgfs') }
+    it { should contain_group('fhgfs') }
+
     it { should contain_file('/etc/fhgfs/fhgfs-client.conf').with({
       'ensure'  => 'present',
       'owner'   => user,
@@ -24,7 +27,6 @@ describe 'fhgfs::install' do
     let(:user) { 'fhgfs' }
     let(:group) { 'fhgfs' }
 
-    it_behaves_like 'debian-install', 'Debian', 'squeeze'
     it_behaves_like 'debian-install', 'Debian', 'wheezy'
     it_behaves_like 'debian-install', 'Ubuntu', 'precise'
   end

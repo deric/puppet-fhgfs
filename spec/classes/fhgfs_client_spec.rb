@@ -46,4 +46,29 @@ describe 'fhgfs::client' do
     it { should contain_package('kernel-devel') }
   end
 
+  context 'with given version' do
+    let(:facts) {{
+      :operatingsystem => 'Debian',
+      :osfamily => 'Debian',
+      :lsbdistcodename => 'wheezy',
+    }}
+    let(:version) { '2012.10.r8.debian7' }
+    let(:params) {{
+      :package_ensure => version
+    }}
+
+    it { should contain_package('fhgfs-client').with({
+      'ensure' => version
+    }) }
+    it { should contain_package('kernel-package').with({
+      'ensure' => version
+    }) }
+    it { should contain_package('fhgfs-helperd').with({
+      'ensure' => version
+    }) }
+    it { should contain_package('fhgfs-client').with({
+      'ensure' => version
+    }) }
+  end
+
 end

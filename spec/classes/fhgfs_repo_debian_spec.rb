@@ -26,7 +26,6 @@ describe 'fhgfs::repo::debian' do
       'release'             => release,
       })
     }
-
   end
 
   context 'install apt-repo deb6' do

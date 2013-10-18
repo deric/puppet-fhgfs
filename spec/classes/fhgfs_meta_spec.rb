@@ -40,9 +40,8 @@ describe 'fhgfs::meta' do
     let(:user) { 'fhgfs' }
     let(:group) { 'fhgfs' }
 
-    #it_behaves_like 'debian-meta', 'Debian', 'squeeze'
     it_behaves_like 'debian-meta', 'Debian', 'wheezy'
-    #it_behaves_like 'debian-meta', 'Ubuntu', 'precise'
+    it_behaves_like 'debian-meta', 'Ubuntu', 'precise'
   end
 
   context 'allow changing parameters' do
@@ -55,6 +54,22 @@ describe 'fhgfs::meta' do
         '/etc/fhgfs/fhgfs-meta.conf'
       ).with_content(/sysMgmtdHost(\s+)=(\s+)192.168.1.1/)
     }
+  end
+
+  context 'with given version' do
+    let(:facts) {{
+      :operatingsystem => 'Debian',
+      :osfamily => 'Debian',
+      :lsbdistcodename => 'wheezy',
+    }}
+    let(:version) { '2012.10.r8.debian7' }
+    let(:params) {{
+      :package_ensure => version
+    }}
+
+    it { should contain_package('fhgfs-meta').with({
+      'ensure' => version
+    }) }
   end
 
  # context 'with hiera' do
