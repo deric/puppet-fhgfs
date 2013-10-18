@@ -16,7 +16,7 @@
 class fhgfs::repo(
   $manage_repo    = $fhgfs::manage_repo,
   $package_source = $fhgfs::package_source,
-  $version        = $fhgfs::version
+  $package_ensure = $fhgfs::package_ensure,
 ) inherits fhgfs {
   anchor { 'fhgfs::repo::begin': }
   anchor { 'fhgfs::repo::end': }
@@ -24,12 +24,14 @@ class fhgfs::repo(
   case $::osfamily {
     Debian: {
       class { 'fhgfs::repo::debian':
+        package_ensure => $package_ensure,
         require        => Anchor['fhgfs::repo::begin'],
         before         => Anchor['fhgfs::repo::end'],
       }
     }
     RedHat: {
       class { 'fhgfs::repo::redhat':
+        package_ensure => $package_ensure,
         require        => Anchor['fhgfs::repo::begin'],
         before         => Anchor['fhgfs::repo::end'],
       }

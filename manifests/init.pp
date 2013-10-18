@@ -1,5 +1,7 @@
 # == Class: fhgfs
 #
+# [*version*] package version e.g. '2012.10.r8.debian7'
+#
 # === Authors
 #
 # Tomas Barton <barton.tomas@gmail.com>
@@ -19,21 +21,16 @@ class fhgfs {
   $storage_space_low_limit       = hiera('fhgfs::storage_space_low_limit', '100G')
   $storage_space_emergency_limit = hiera('fhgfs::storage_space_emergency_limit', '10G')
   $package_source                = hiera('fhgfs::package_source', 'fhgfs')
-  $package_ensure                = hiera('fhgfs::package_ensure', 'present')
+  $version                       = hiera('fhgfs::version', undef)
   $log_dir                       = hiera('fhgfs::log_dir', '/var/log/fhgfs')
   $user                          = hiera('fhgfs::user', 'fhgfs')
   $group                         = hiera('fhgfs::group','fhgfs')
+  $major_version                 = hiera('fhgfs::major_version','fhgfs_2012.10')
 
-
-  case $::osfamily {
-    Debian: {
-      $version       = hiera('fhgfs::version','2012.10.r8.debian7')
-      $major_version = hiera('fhgfs::major_version','fhgfs_2012.10')
-    }
-    default: {
-      $version       = hiera('fhgfs::version','2012.10')
-      $major_version = hiera('fhgfs::major_version','fhgfs_2012.10')
-    }
+  if ($version == undef){
+    $package_ensure = 'present'
+  }else{
+    $package_ensure = $version
   }
 }
 

@@ -6,16 +6,16 @@ class fhgfs::storage (
   $enable            = true,
   $storage_directory = $fhgfs::storage_directory,
   $mgmtd_host        = $fhgfs::mgmtd_host,
-  $version           = $fhgfs::version,
   $log_dir           = $fhgfs::log_dir,
   $user              = $fhgfs::user,
   $group             = $fhgfs::group,
+  $package_ensure    = $fhgfs::package_ensure,
 ) inherits fhgfs {
 
   require fhgfs::install
 
   package { 'fhgfs-storage':
-    ensure => $version,
+    ensure => $package_ensure,
   }
 
   file { $storage_directory:
@@ -26,7 +26,7 @@ class fhgfs::storage (
   }
 
   file { '/etc/fhgfs/fhgfs-storage.conf':
-    ensure  => present,
+    ensure  => $package_ensure,
     owner   => $user,
     group   => $group,
     mode    => '0755',

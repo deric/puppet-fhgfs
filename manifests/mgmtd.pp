@@ -14,12 +14,13 @@ class fhgfs::mgmtd (
   $log_dir                       = $fhgfs::log_dir,
   $user                          = $fhgfs::user,
   $group                         = $fhgfs::group,
+  $package_ensure                = $fhgfs::package_ensure,
   ) inherits fhgfs {
 
   require fhgfs::install
 
   package { 'fhgfs-mgmtd':
-    ensure  => $version,
+    ensure  => $package_ensure,
   }
 
   # mgmgtd main directory

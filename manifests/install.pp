@@ -5,7 +5,6 @@
 class fhgfs::install(
   $manage_repo    = $fhgfs::manage_repo,
   $package_source = $fhgfs::package_source,
-  $version        = $fhgfs::version,
   $log_dir        = $fhgfs::log_dir,
   $user           = $fhgfs::user,
   $group          = $fhgfs::group,
@@ -14,7 +13,6 @@ class fhgfs::install(
   class { 'fhgfs::repo':
     manage_repo    => $manage_repo,
     package_source => $package_source,
-    version        => $version,
   }
 
   anchor { 'fhgfs::user' : }

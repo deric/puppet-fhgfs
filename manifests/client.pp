@@ -3,9 +3,9 @@
 # This module manages FhGFS client
 #
 class fhgfs::client (
-  $version = $fhgfs::version,
-  $user    = $fhgfs::user,
-  $group   = $fhgfs::group,
+  $user           = $fhgfs::user,
+  $group          = $fhgfs::group,
+  $package_ensure = $fhgfs::package_ensure,
 ) inherits fhgfs {
 
   require fhgfs::install
@@ -15,13 +15,13 @@ class fhgfs::client (
   case $::osfamily {
     Debian: {
       package { 'kernel-package' :
-        ensure => present,
+        ensure => $package_ensure,
         before => Anchor['fhgfs::kernel_dev']
       }
     }
     RedHat: {
       package { 'kernel-devel' :
-        ensure => present,
+        ensure => $package_ensure,
         before => Anchor['fhgfs::kernel_dev']
       }
     }
@@ -31,10 +31,10 @@ class fhgfs::client (
   }
 
   package { 'fhgfs-helperd':
-    ensure   => $version,
+    ensure   => $package_ensure,
   }
   package { 'fhgfs-client':
-    ensure   => $version,
+    ensure   => $package_ensure,
     require  => Anchor['fhgfs::kernel_dev'],
   }
   service { 'fhgfs-helperd':

@@ -6,20 +6,20 @@ class fhgfs::meta (
   $enable         = true,
   $meta_directory = $fhgfs::meta_directory,
   $mgmtd_host     = $fhgfs::mgmtd_host,
-  $version        = $fhgfs::version,
   $log_dir        = $fhgfs::log_dir,
   $user           = $fhgfs::user,
   $group          = $fhgfs::group,
+  $package_ensure = $fhgfs::package_ensure,
 ) inherits fhgfs {
 
   require fhgfs::install
 
   package { 'fhgfs-meta':
-    ensure => $version,
+    ensure => $package_ensure,
   }
 
   file { '/etc/fhgfs/fhgfs-meta.conf':
-    ensure  => 'present',
+    ensure  => $package_ensure,
     owner   => $user,
     group   => $group,
     mode    => '0755',
