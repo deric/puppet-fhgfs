@@ -51,6 +51,7 @@ class fhgfs::client (
   }
 
   service { 'fhgfs-client':
+    ensure   => running,
     enable     => true,
     hasstatus  => true,
     hasrestart => true,

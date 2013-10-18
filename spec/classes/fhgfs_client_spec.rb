@@ -12,6 +12,10 @@ describe 'fhgfs::client' do
     it { should contain_package('fhgfs-helperd') }
     it { should contain_package('fhgfs-client') }
 
+    it { should contain_service('fhgfs-client').with(
+        :ensure => 'running',
+        :enable => true
+    ) }
 
     it { should contain_service('fhgfs-helperd').with(
         :ensure => 'running',

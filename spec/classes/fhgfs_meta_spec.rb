@@ -8,7 +8,6 @@ describe 'fhgfs::meta' do
     :lsbdistcodename => 'wheezy',
   }}
 
-
   shared_examples 'debian-meta' do |os, codename|
     let(:facts) {{
       :operatingsystem => os,
@@ -32,8 +31,6 @@ describe 'fhgfs::meta' do
       'mode'    => '0755',
       'require' => 'Package[fhgfs-meta]',
     }) }
-
-
   end
 
   context 'on debian-like system' do

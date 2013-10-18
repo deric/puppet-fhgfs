@@ -7,9 +7,8 @@ describe 'fhgfs::storage' do
       :osfamily => 'Debian',
       :lsbdistcodename => codename,
     }}
-    it { should contain_package('fhgfs-storage') }
-    it { should contain_package('fhgfs-utils') }
 
+    it { should contain_package('fhgfs-utils') }
     it { should contain_service('fhgfs-storage').with(
         :ensure => 'running',
         :enable => true
@@ -23,13 +22,11 @@ describe 'fhgfs::storage' do
       'require' => 'Package[fhgfs-storage]',
     }) }
 
-
     it { should contain_file('/storage').with({
       'ensure'  => 'directory',
       'owner'   => user,
       'group'   => group,
     }) }
-
   end
 
   context 'on debian-like system' do
