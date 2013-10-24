@@ -7,6 +7,7 @@ define fhgfs::mount (
   $mnt,
   $user   = $fhgfs::user,
   $group  = $fhgfs::group,
+
 ) {
 
   include fhgfs::client
@@ -16,5 +17,11 @@ define fhgfs::mount (
     owner   => $user,
     group   => $group,
     mode    => '0755',
+  }
+
+  file_line { 'mnt_config':
+    line    => "${mnt} ${cfg}",
+    path    => '/etc/fhgfs/fhgfs-mounts.conf',
+    require => File[$mnt],
   }
 }
