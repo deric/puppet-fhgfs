@@ -19,13 +19,6 @@ define fhgfs::mount (
     mode    => '0755',
   }
 
-  file { $mounts_cfg:
-    ensure  => present,
-    owner   => $user,
-    group   => $group,
-    mode    => '0755',
-  }
-
   file_line { 'mnt_config':
     line    => "${mnt} ${cfg}",
     path    => $mounts_cfg,
