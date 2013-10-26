@@ -26,6 +26,7 @@ class fhgfs {
   $user                          = hiera('fhgfs::user', 'fhgfs')
   $group                         = hiera('fhgfs::group','fhgfs')
   $major_version                 = hiera('fhgfs::major_version','fhgfs_2012.10')
+  $admon_db_file                 = hiera('fhgfs::admon_db_file','/var/lib/fhgfs/fhgfs-admon.db')
 
   if ($version == undef){
     $package_ensure = 'present'

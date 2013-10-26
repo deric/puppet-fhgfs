@@ -25,7 +25,7 @@ describe 'fhgfs::admon' do
   }) }
 
   # depends on hiera, which is not correctly setted up in tests
-  xit { should contain_file('/etc/fhgfs/fhgfs-admon.conf').with_content(
+  it { should contain_file('/etc/fhgfs/fhgfs-admon.conf').with_content(
     /databaseFile(\s+)=(\s+)\/var\/lib\/fhgfs\/fhgfs\-admon.db/
   ) }
 
