@@ -40,6 +40,8 @@ class fhgfs::client (
   service { 'fhgfs-helperd':
     ensure   => running,
     enable   => true,
+    hasstatus  => true,
+    hasrestart => true,
     require  => Package['fhgfs-helperd'],
   }
   file { '/etc/fhgfs/fhgfs-mounts.conf':

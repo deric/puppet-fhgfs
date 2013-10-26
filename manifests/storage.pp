@@ -37,6 +37,8 @@ class fhgfs::storage (
   service { 'fhgfs-storage':
     ensure    => running,
     enable    => $enable,
+    hasstatus  => true,
+    hasrestart => true,
     require   => Package['fhgfs-storage'],
     subscribe => File['/etc/fhgfs/fhgfs-storage.conf'];
   }

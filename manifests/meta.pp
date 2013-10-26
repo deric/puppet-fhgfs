@@ -30,6 +30,8 @@ class fhgfs::meta (
   service { 'fhgfs-meta':
     ensure    => running,
     enable    => $enable,
+    hasstatus  => true,
+    hasrestart => true,
     require   => Package['fhgfs-meta'],
     subscribe => File['/etc/fhgfs/fhgfs-meta.conf'];
   }
