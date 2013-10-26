@@ -1,5 +1,5 @@
 name    'puppet-fhgfs'
-version '0.2.0'
+version '0.2.1'
 source 'https://github.com/deric/puppet-fhgfs'
 author 'Tomas Barton'
 license 'Apache License, Version 2.0'
