@@ -19,7 +19,7 @@ class fhgfs::meta (
   }
 
   file { '/etc/fhgfs/fhgfs-meta.conf':
-    ensure  => $package_ensure,
+    ensure  => present,
     owner   => $user,
     group   => $group,
     mode    => '0755',

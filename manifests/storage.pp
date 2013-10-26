@@ -26,7 +26,7 @@ class fhgfs::storage (
   }
 
   file { '/etc/fhgfs/fhgfs-storage.conf':
-    ensure  => $package_ensure,
+    ensure  => present,
     owner   => $user,
     group   => $group,
     mode    => '0755',
