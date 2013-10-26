@@ -46,8 +46,14 @@ describe 'fhgfs::client' do
       :osfamily => 'RedHat',
       :lsbdistcodename => '6',
     }}
+    let(:params){{
+      :kernel_ensure => '12.036+nmu3'
+    }}
 
-    it { should contain_package('kernel-devel') }
+    # kernel packages have different versions than fhgfs
+    it { should contain_package('kernel-devel').with({
+      'ensure' => '12.036+nmu3'
+    }) }
   end
 
   context 'with given version' do
@@ -65,7 +71,7 @@ describe 'fhgfs::client' do
       'ensure' => version
     }) }
     it { should contain_package('kernel-package').with({
-      'ensure' => version
+      'ensure' => 'present'
     }) }
     it { should contain_package('fhgfs-helperd').with({
       'ensure' => version

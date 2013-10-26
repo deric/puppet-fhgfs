@@ -6,6 +6,7 @@ class fhgfs::client (
   $user           = $fhgfs::user,
   $group          = $fhgfs::group,
   $package_ensure = $fhgfs::package_ensure,
+  $kernel_ensure  = present,
 ) inherits fhgfs {
 
   require fhgfs::install
@@ -15,13 +16,13 @@ class fhgfs::client (
   case $::osfamily {
     Debian: {
       package { 'kernel-package' :
-        ensure => $package_ensure,
+        ensure => $kernel_ensure,
         before => Anchor['fhgfs::kernel_dev']
       }
     }
     RedHat: {
       package { 'kernel-devel' :
-        ensure => $package_ensure,
+        ensure => $kernel_ensure,
         before => Anchor['fhgfs::kernel_dev']
       }
     }
