@@ -27,12 +27,14 @@ class fhgfs::admon (
     require => Package['fhgfs-admon'],
   }
 
-  service { 'fhgfs-admon':
-    ensure    => running,
-    enable    => $enable,
-    hasstatus  => true,
-    hasrestart => true,
-    require   => Package['fhgfs-admon'],
-    subscribe => File['/etc/fhgfs/fhgfs-admon.conf'];
+  if $package_ensure != 'absent' {
+    service { 'fhgfs-admon':
+      ensure    => running,
+      enable    => $enable,
+      hasstatus  => true,
+      hasrestart => true,
+      require   => Package['fhgfs-admon'],
+      subscribe => File['/etc/fhgfs/fhgfs-admon.conf'];
+    }
   }
 }
