@@ -62,9 +62,9 @@ describe 'fhgfs::admon' do
       :package_ensure => 'absent',
     }}
 
-    it { should contain_package('fhgfs-admon').with(
+    it { should contain_package('fhgfs-admon').with({
         :ensure => 'absent',
-    ) }
+    }) }
     it { should_not contain_service('fhgfs-admon') }
   end
 
