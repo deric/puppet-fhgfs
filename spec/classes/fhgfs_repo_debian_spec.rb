@@ -39,6 +39,7 @@ describe 'fhgfs::repo::debian' do
 
     it_behaves_like 'debian_apt_repo', 'Debian', 'wheezy'
     it_behaves_like 'debian_apt_repo', 'Ubuntu', 'precise'
+    it_behaves_like 'debian_apt_repo', 'Ubuntu', 'trusty'
   end
 
 end
