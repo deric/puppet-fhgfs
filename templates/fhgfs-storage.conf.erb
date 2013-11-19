@@ -27,7 +27,7 @@ connStoragePortTCP     = 8003
 connUseSDP             = false
 connUseRDMA            = true
 connBacklogTCP         = 128
-connInterfacesFile     =
+connInterfacesFile     = <%= @interfaces_file %>
 connNetFilterFile      =
 
 storeStorageDirectory  = <%= scope.lookupvar('fhgfs::storage::storage_directory') %>

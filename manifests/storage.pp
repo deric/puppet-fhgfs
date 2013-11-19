@@ -10,9 +10,12 @@ class fhgfs::storage (
   $user              = $fhgfs::user,
   $group             = $fhgfs::group,
   $package_ensure    = $fhgfs::package_ensure,
+  $interfaces        = ['eth0'],
+  $interfaces_file   = '/etc/fhgfs/storage.interfaces',
 ) inherits fhgfs {
 
   require fhgfs::install
+  validate_array($interfaces)
 
   package { 'fhgfs-storage':
     ensure => $package_ensure,
@@ -25,13 +28,24 @@ class fhgfs::storage (
     recurse => true,
   }
 
+  file { $interfaces_file:
+    ensure => present,
+    owner   => $user,
+    group   => $group,
+    mode    => '0755',
+    content => template('fhgfs/interfaces.erb'),
+  }
+
   file { '/etc/fhgfs/fhgfs-storage.conf':
     ensure  => present,
     owner   => $user,
     group   => $group,
     mode    => '0755',
     content => template('fhgfs/fhgfs-storage.conf.erb'),
-    require => Package['fhgfs-storage'],
+    require => [
+      File["$interfaces_file"],
+      Package['fhgfs-storage'],
+    ],
   }
 
   service { 'fhgfs-storage':
