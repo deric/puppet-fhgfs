@@ -66,7 +66,13 @@ class fhgfs::mgmtd (
     enable     => $enable,
     hasstatus  => true,
     hasrestart => true,
-    require    => Package['fhgfs-mgmtd'],
-    subscribe  => File['/etc/fhgfs/fhgfs-mgmtd.conf'];
+    require    => [
+      Package['fhgfs-mgmtd'],
+      File[$interfaces_file],
+    ],
+    subscribe  => [
+      File['/etc/fhgfs/fhgfs-mgmtd.conf'],
+      File[$interfaces_file],
+    ],
   }
 }
