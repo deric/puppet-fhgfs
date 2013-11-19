@@ -7,9 +7,12 @@ class fhgfs::client (
   $group          = $fhgfs::group,
   $package_ensure = $fhgfs::package_ensure,
   $kernel_ensure  = present,
+  $interfaces        = ['eth0'],
+  $interfaces_file   = '/etc/fhgfs/client.interfaces',
 ) inherits fhgfs {
 
   require fhgfs::install
+  validate_array($interfaces)
 
   anchor { 'fhgfs::kernel_dev' : }
 
@@ -31,13 +34,36 @@ class fhgfs::client (
     }
   }
 
+  file { $interfaces_file:
+    ensure => present,
+    owner   => $user,
+    group   => $group,
+    mode    => '0755',
+    content => template('fhgfs/interfaces.erb'),
+  }
+
+  file { '/etc/fhgfs/fhgfs-client.conf':
+    ensure  => present,
+    owner   => $user,
+    group   => $group,
+    mode    => '0755',
+    require => [
+      Package['fhgfs-utils'],
+      File[$interfaces_file],
+    ],
+    content => template('fhgfs/fhgfs-client.conf.erb'),
+  }
+
+
   package { 'fhgfs-helperd':
     ensure   => $package_ensure,
   }
+
   package { 'fhgfs-client':
     ensure   => $package_ensure,
     require  => Anchor['fhgfs::kernel_dev'],
   }
+
   service { 'fhgfs-helperd':
     ensure   => running,
     enable   => true,
@@ -45,6 +71,7 @@ class fhgfs::client (
     hasrestart => true,
     require  => Package['fhgfs-helperd'],
   }
+
   file { '/etc/fhgfs/fhgfs-mounts.conf':
     ensure  => present,
     owner   => $user,
@@ -61,7 +88,12 @@ class fhgfs::client (
     require    => [
       Package['fhgfs-client'],
       Service['fhgfs-helperd'],
-      File['/etc/fhgfs/fhgfs-mounts.conf']
+      File['/etc/fhgfs/fhgfs-mounts.conf'],
+      File[$interfaces_file],
+    ],
+    subscribe => [
+      File['/etc/fhgfs/fhgfs-mounts.conf'],
+      File[$interfaces_file],
     ],
   }
 }

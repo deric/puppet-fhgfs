@@ -1,6 +1,15 @@
 require 'spec_helper'
 
 describe 'fhgfs::client' do
+  let(:facts) {{
+    :operatingsystem => 'Debian',
+    :osfamily => 'Debian',
+    :lsbdistcodename => 'wheezy',
+  }}
+
+  let(:user) { 'fhgfs' }
+  let(:group) { 'fhgfs' }
+
   shared_examples 'debian_fhgfs-client' do |os, codename|
     let(:facts) {{
       :operatingsystem => os,
@@ -27,6 +36,13 @@ describe 'fhgfs::client' do
       'owner'   => user,
       'group'   => group,
       'mode'    => '0755'
+    }) }
+
+    it { should contain_file('/etc/fhgfs/fhgfs-client.conf').with({
+      'ensure'  => 'present',
+      'owner'   => user,
+      'group'   => group,
+      'mode'    => '0755',
     }) }
 
   end
@@ -57,11 +73,6 @@ describe 'fhgfs::client' do
   end
 
   context 'with given version' do
-    let(:facts) {{
-      :operatingsystem => 'Debian',
-      :osfamily => 'Debian',
-      :lsbdistcodename => 'wheezy',
-    }}
     let(:version) { '2012.10.r8.debian7' }
     let(:params) {{
       :package_ensure => version
@@ -79,6 +90,33 @@ describe 'fhgfs::client' do
     it { should contain_package('fhgfs-client').with({
       'ensure' => version
     }) }
+  end
+
+  it { should contain_file('/etc/fhgfs/client.interfaces').with({
+    'ensure'  => 'present',
+    'owner'   => user,
+    'group'   => group,
+    'mode'    => '0755',
+  }).with_content(/eth0/) }
+
+  context 'interfaces file' do
+    let(:params) {{
+      :interfaces      => ['eth0', 'ib0'],
+      :interfaces_file => '/etc/fhgfs/client.itf',
+    }}
+
+    it { should contain_file('/etc/fhgfs/client.itf').with({
+      'ensure'  => 'present',
+      'owner'   => user,
+      'group'   => group,
+      'mode'    => '0755',
+    }).with_content(/ib0/) }
+
+
+    it { should contain_file(
+        '/etc/fhgfs/fhgfs-client.conf'
+      ).with_content(/connInterfacesFile(\s+)=(\s+)\/etc\/fhgfs\/client.itf/)
+    }
   end
 
 end

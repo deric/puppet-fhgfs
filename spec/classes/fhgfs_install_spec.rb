@@ -12,15 +12,6 @@ describe 'fhgfs::install' do
 
     it { should contain_user('fhgfs') }
     it { should contain_group('fhgfs') }
-
-    it { should contain_file('/etc/fhgfs/fhgfs-client.conf').with({
-      'ensure'  => 'present',
-      'owner'   => user,
-      'group'   => group,
-      'mode'    => '0755',
-      'require' => 'Package[fhgfs-utils]',
-    }) }
-
   end
 
   context 'on debian-like system' do
