@@ -15,9 +15,12 @@ class fhgfs::mgmtd (
   $user                          = $fhgfs::user,
   $group                         = $fhgfs::group,
   $package_ensure                = $fhgfs::package_ensure,
+  $interfaces                    = ['eth0'],
+  $interfaces_file               = '/etc/fhgfs/mgmtd.interfaces',
   ) inherits fhgfs {
 
   require fhgfs::install
+  validate_array($interfaces)
 
   package { 'fhgfs-mgmtd':
     ensure  => $package_ensure,
@@ -39,12 +42,23 @@ class fhgfs::mgmtd (
     recurse => true,
   })
 
+  file { $interfaces_file:
+    ensure => present,
+    owner   => $user,
+    group   => $group,
+    mode    => '0755',
+    content => template('fhgfs/interfaces.erb'),
+  }
+
   file { '/etc/fhgfs/fhgfs-mgmtd.conf':
     ensure  => present,
     owner   => $user,
     group   => $group,
     content => template('fhgfs/fhgfs-mgmtd.conf.erb'),
-    require => Package['fhgfs-mgmtd'],
+    require => [
+      Package['fhgfs-mgmtd'],
+      File[$interfaces_file],
+    ],
   }
 
   service { 'fhgfs-mgmtd':
