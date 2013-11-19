@@ -60,7 +60,6 @@ describe 'fhgfs::storage' do
     }) }
   end
 
-
   it { should contain_file('/etc/fhgfs/storage.interfaces').with({
     'ensure'  => 'present',
     'owner'   => user,
@@ -70,15 +69,22 @@ describe 'fhgfs::storage' do
 
   context 'interfaces file' do
     let(:params) {{
-      :interfaces => ['eth0', 'ib0']
+      :interfaces      => ['eth0', 'ib0'],
+      :interfaces_file => '/etc/fhgfs/store.itf',
     }}
 
-    it { should contain_file('/etc/fhgfs/storage.interfaces').with({
+    it { should contain_file('/etc/fhgfs/store.itf').with({
       'ensure'  => 'present',
       'owner'   => user,
       'group'   => group,
       'mode'    => '0755',
     }).with_content(/ib0/) }
+
+
+    it { should contain_file(
+        '/etc/fhgfs/fhgfs-storage.conf'
+      ).with_content(/connInterfacesFile(\s+)=(\s+)\/etc\/fhgfs\/store.itf/)
+    }
   end
 
 end

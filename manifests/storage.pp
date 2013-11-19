@@ -54,6 +54,9 @@ class fhgfs::storage (
     hasstatus  => true,
     hasrestart => true,
     require   => Package['fhgfs-storage'],
-    subscribe => File['/etc/fhgfs/fhgfs-storage.conf'];
+    subscribe => [
+      File['/etc/fhgfs/fhgfs-storage.conf'],
+      File["$interfaces_file"],
+    ],
   }
 }

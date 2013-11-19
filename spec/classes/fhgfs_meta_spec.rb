@@ -8,6 +8,9 @@ describe 'fhgfs::meta' do
     :lsbdistcodename => 'wheezy',
   }}
 
+  let(:user) { 'fhgfs' }
+  let(:group) { 'fhgfs' }
+
   shared_examples 'debian-meta' do |os, codename|
     let(:facts) {{
       :operatingsystem => os,
@@ -29,7 +32,6 @@ describe 'fhgfs::meta' do
       'owner'   => user,
       'group'   => group,
       'mode'    => '0755',
-      'require' => 'Package[fhgfs-meta]',
     }) }
   end
 
@@ -67,6 +69,33 @@ describe 'fhgfs::meta' do
     it { should contain_package('fhgfs-meta').with({
       'ensure' => version
     }) }
+  end
+
+  it { should contain_file('/etc/fhgfs/meta.interfaces').with({
+    'ensure'  => 'present',
+    'owner'   => user,
+    'group'   => group,
+    'mode'    => '0755',
+  }).with_content(/eth0/) }
+
+  context 'interfaces file' do
+    let(:params) {{
+      :interfaces      => ['eth0', 'ib0'],
+      :interfaces_file => '/etc/fhgfs/meta.itf',
+    }}
+
+    it { should contain_file('/etc/fhgfs/meta.itf').with({
+      'ensure'  => 'present',
+      'owner'   => user,
+      'group'   => group,
+      'mode'    => '0755',
+    }).with_content(/ib0/) }
+
+
+    it { should contain_file(
+        '/etc/fhgfs/fhgfs-meta.conf'
+      ).with_content(/connInterfacesFile(\s+)=(\s+)\/etc\/fhgfs\/meta.itf/)
+    }
   end
 
  # context 'with hiera' do
