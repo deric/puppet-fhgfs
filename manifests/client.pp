@@ -3,12 +3,13 @@
 # This module manages FhGFS client
 #
 class fhgfs::client (
-  $user           = $fhgfs::user,
-  $group          = $fhgfs::group,
-  $package_ensure = $fhgfs::package_ensure,
-  $kernel_ensure  = present,
-  $interfaces        = ['eth0'],
-  $interfaces_file   = '/etc/fhgfs/client.interfaces',
+  $user            = $fhgfs::user,
+  $group           = $fhgfs::group,
+  $package_ensure  = $fhgfs::package_ensure,
+  $kernel_ensure   = present,
+  $interfaces      = ['eth0'],
+  $interfaces_file = '/etc/fhgfs/client.interfaces',
+  $log_level       = 3,
 ) inherits fhgfs {
 
   require fhgfs::install
