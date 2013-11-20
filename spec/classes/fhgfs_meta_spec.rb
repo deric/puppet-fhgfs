@@ -98,6 +98,20 @@ describe 'fhgfs::meta' do
     }
   end
 
+  it { should contain_file(
+    '/etc/fhgfs/fhgfs-meta.conf'
+  ).with_content(/logLevel(\s+)=(\s+)3/) }
+
+  context 'changing log level' do
+    let(:params) {{
+      :log_level => 5,
+    }}
+
+    it { should contain_file(
+      '/etc/fhgfs/fhgfs-meta.conf'
+    ).with_content(/logLevel(\s+)=(\s+)5/) }
+  end
+
  # context 'with hiera' do
  #    include_context 'hieradata'
  #
