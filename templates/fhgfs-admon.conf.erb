@@ -13,7 +13,7 @@
 # --- Section 1: [Settings] ---
 #
 
-logLevel                 = 2
+logLevel                 = <%= @log_level %>
 logNoDate                = false
 logStdFile               = <%= scope.lookupvar('fhgfs::admon::log_dir') %>/admon.log
 logNumLines              = 50000

@@ -7,6 +7,7 @@ class fhgfs::admon (
   $mgmtd_host        = $fhgfs::mgmtd_host,
   $db_file           = $fhgfs::admon_db_file,
   $log_dir           = $fhgfs::log_dir,
+  $log_level         = 2,
   $user              = $fhgfs::user,
   $group             = $fhgfs::group,
   $package_ensure    = $fhgfs::package_ensure,
