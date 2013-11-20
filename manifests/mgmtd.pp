@@ -12,6 +12,7 @@ class fhgfs::mgmtd (
   $storage_space_emergency_limit = $fhgfs::storage_space_emergency_limit,
   $version                       = $fhgfs::version,
   $log_dir                       = $fhgfs::log_dir,
+  $log_level                     = 2,
   $user                          = $fhgfs::user,
   $group                         = $fhgfs::group,
   $package_ensure                = $fhgfs::package_ensure,
