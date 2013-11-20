@@ -13,7 +13,7 @@
 # --- Section 1: [Settings] ---
 #
 
-logLevel               = 3
+logLevel               = <%= @log_level %>
 logNoDate              = false
 logStdFile             = <%= scope.lookupvar('fhgfs::storage::log_dir') %>/storage.log
 logNumLines            = 50000

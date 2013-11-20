@@ -7,6 +7,7 @@ class fhgfs::storage (
   $storage_directory = $fhgfs::storage_directory,
   $mgmtd_host        = $fhgfs::mgmtd_host,
   $log_dir           = $fhgfs::log_dir,
+  $log_level         = 3,
   $user              = $fhgfs::user,
   $group             = $fhgfs::group,
   $package_ensure    = $fhgfs::package_ensure,

@@ -87,4 +87,18 @@ describe 'fhgfs::storage' do
     }
   end
 
+  it { should contain_file(
+    '/etc/fhgfs/fhgfs-storage.conf'
+  ).with_content(/logLevel(\s+)=(\s+)3/) }
+
+  context 'changing log level' do
+    let(:params) {{
+      :log_level => 5,
+    }}
+
+    it { should contain_file(
+      '/etc/fhgfs/fhgfs-storage.conf'
+    ).with_content(/logLevel(\s+)=(\s+)5/) }
+  end
+
 end
