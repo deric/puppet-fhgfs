@@ -1,4 +1,4 @@
-name    'puppet-fhgfs'
+name    'deric-fhgfs'
 version '0.2.2'
 source 'https://github.com/deric/puppet-fhgfs'
 author 'Tomas Barton'
