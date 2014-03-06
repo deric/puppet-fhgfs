@@ -14,6 +14,7 @@
 #
 
 logLevel                      = <%= @log_level %>
+logType                       = helperd
 logClientID                   = false
 logHelperdIP                  =
 
@@ -26,6 +27,7 @@ connUseSDP                    = false
 connUseRDMA                   = true
 connRDMABufSize               = 8192
 connRDMABufNum                = 128
+connRDMATypeOfService         = 0
 connMaxInternodeNum           = 12
 connInterfacesFile            = <%= @interfaces_file %>
 connNetFilterFile             =
@@ -41,7 +43,11 @@ tuneUseGlobalFileLocks        = false
 
 sysMgmtdHost                  = <%= scope.lookupvar('fhgfs::mgmtd_host') %>
 sysCreateHardlinksAsSymlinks  = true
-sysMountSanityCheckMS         = 0
+sysMountSanityCheckMS         = 11000
+sysSyncOnClose                = false
+sysSessionCheckOnClose        = false
+
+quotaEnabled                  = false
 
 
 #
@@ -53,7 +59,7 @@ sysMountSanityCheckMS         = 0
 # sysMgmtdHost, sysMountSanityCheckMS.
 #
 # Use the mount option "cfgFile" to specify a different config file
-# for fhgfs_client.
+# for the fhgfs client.
 # Example:
 # $ /bin/mount -t fhgfs fhgfs_dev /fhgfs -ocfgFile=/etc/anotherconfig.conf
 #
@@ -73,6 +79,13 @@ sysMountSanityCheckMS         = 0
 # level 5 will print debug messages.
 # Note: Levels above 3 might decrease performance.
 # Default: 3 (Max: 5)
+
+# [logType]
+# Defines the logger type. This can either be "helperd" to send log messages to
+# the helper daemon (which will append them to the specified log file) or
+# "syslog" to send log messages to the general system logger.
+# Default: helperd
+
 
 # [logClientID]
 # Defines whether the ClientID should appear in each log line. This usually
@@ -229,6 +242,26 @@ sysMountSanityCheckMS         = 0
 # the local machine only (=false) or globally on the servers (=true).
 # Default: false
 
+# [sysSyncOnClose]
+# Sync file contents on close. If this option is set to true, the storage
+# servers will flush the write cache of a file to disk immediately when it is
+# closed by the application. If this option is set to false, the write cache
+# will be flushed to disk asynchronously after a few seconds.
+# Note: If this option is true, performance will be decreased.
+# Default: false
+
+# [sysSessionCheckOnClose]
+# Checks for a valid session on the storage servers when a file is closed. If
+# this option is set to true, a potential cache loss from a crash of a storage
+# server can be detected. This will be reported to the user application as a
+# close() error code.
+# Note: There is also a session check included in all read/write/fsync messages,
+#    which is independent of this setting.
+# Note: If this option is set to true, more network messages are required on
+#    close(), so performance will decreased.
+# Default: false
+
+
 
 #
 # --- Section 3.4: [System Settings] ---
@@ -251,3 +284,14 @@ sysMountSanityCheckMS         = 0
 # (especially the management daemon) to respond. Use 0 to disable all checks
 # and allow mounting even if no servers are reachable.
 # Default: 3000
+
+# [quotaEnabled]
+# Enables user and group quota support by transferring extra user data to the
+# servers. This uses quota information of the underlying file systems on the
+# storage servers, which needs to be enabled by the server administrator.
+# Note: In the first implementation, only quota monitoring is available.
+# Note: Get quota information with "fhgfs-ctl --getquota".
+# Note: If this option is true, performance might be slightly decreased due to
+#    extra information tracking.
+# Default: false
+
