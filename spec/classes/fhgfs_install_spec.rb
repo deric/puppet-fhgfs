@@ -6,6 +6,7 @@ describe 'fhgfs::install' do
       :operatingsystem => os,
       :osfamily => 'Debian',
       :lsbdistcodename => codename,
+      :lsbdistid => 'Debian',
     }}
 
     it { should include_class('fhgfs::repo') }

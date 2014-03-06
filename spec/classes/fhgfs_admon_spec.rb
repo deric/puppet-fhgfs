@@ -5,6 +5,7 @@ describe 'fhgfs::admon' do
     :operatingsystem => 'Debian',
     :osfamily => 'Debian',
     :lsbdistcodename => 'wheezy',
+    :lsbdistid => 'Debian',
   }}
 
   let(:user) { 'fhgfs' }
