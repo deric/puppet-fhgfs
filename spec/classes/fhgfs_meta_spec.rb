@@ -17,6 +17,7 @@ describe 'fhgfs::meta' do
       :operatingsystem => os,
       :osfamily => 'Debian',
       :lsbdistcodename => codename,
+      :lsbdistid => 'Debian',
     }}
     it { should contain_package('fhgfs-meta') }
     it { should contain_package('fhgfs-utils') }
@@ -61,6 +62,7 @@ describe 'fhgfs::meta' do
       :operatingsystem => 'Debian',
       :osfamily => 'Debian',
       :lsbdistcodename => 'wheezy',
+      :lsbdistid => 'Debian',
     }}
     let(:version) { '2012.10.r8.debian7' }
     let(:params) {{
