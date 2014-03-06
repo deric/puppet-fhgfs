@@ -13,6 +13,7 @@ describe 'fhgfs::repo::debian' do
       :operatingsystem => os,
       :osfamily => 'Debian',
       :lsbdistcodename => codename,
+      :lsbdistid => 'Debian',
     }}
 
     it { should contain_exec(

@@ -16,6 +16,7 @@ describe 'fhgfs::mgmtd' do
       :operatingsystem => os,
       :osfamily => 'Debian',
       :lsbdistcodename => codename,
+      :lsbdistid => 'Debian',
     }}
     it { should contain_package('fhgfs-mgmtd') }
     it { should contain_package('fhgfs-utils') }

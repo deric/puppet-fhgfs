@@ -6,6 +6,7 @@ describe 'fhgfs::storage' do
     :operatingsystem => 'Debian',
     :osfamily => 'Debian',
     :lsbdistcodename => 'wheezy',
+    :lsbdistid => 'Debian',
   }}
 
   let(:user) { 'fhgfs' }
@@ -16,6 +17,7 @@ describe 'fhgfs::storage' do
       :operatingsystem => os,
       :osfamily => 'Debian',
       :lsbdistcodename => codename,
+      :lsbdistid => 'Debian',
     }}
 
     it { should contain_package('fhgfs-utils') }

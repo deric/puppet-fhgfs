@@ -16,6 +16,7 @@ describe 'fhgfs::client' do
       :operatingsystem => os,
       :osfamily => 'Debian',
       :lsbdistcodename => codename,
+      :lsbdistid => 'Debian',
     }}
     it { should contain_package('fhgfs-client') }
     it { should contain_package('kernel-package') }
@@ -62,6 +63,7 @@ describe 'fhgfs::client' do
       :operatingsystem => 'RedHat',
       :osfamily => 'RedHat',
       :lsbdistcodename => '6',
+      :lsbdistid => 'RedHat',
     }}
     let(:params){{
       :kernel_ensure => '12.036+nmu3'
