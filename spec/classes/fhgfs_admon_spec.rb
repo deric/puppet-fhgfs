@@ -11,6 +11,11 @@ describe 'fhgfs::admon' do
   let(:user) { 'fhgfs' }
   let(:group) { 'fhgfs' }
 
+  let(:params) {{
+    'user'  => user,
+    'group' => group,
+  }}
+
   it { should contain_package('fhgfs-utils') }
   it { should contain_service('fhgfs-admon').with(
       :ensure => 'running',

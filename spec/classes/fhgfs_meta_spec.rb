@@ -12,6 +12,11 @@ describe 'fhgfs::meta' do
   let(:user) { 'fhgfs' }
   let(:group) { 'fhgfs' }
 
+  let(:params) {{
+    :user  => user,
+    :group => group,
+  }}
+
   shared_examples 'debian-meta' do |os, codename|
     let(:facts) {{
       :operatingsystem => os,
@@ -85,6 +90,8 @@ describe 'fhgfs::meta' do
     let(:params) {{
       :interfaces      => ['eth0', 'ib0'],
       :interfaces_file => '/etc/fhgfs/meta.itf',
+      :user            => user,
+      :group           => group,
     }}
 
     it { should contain_file('/etc/fhgfs/meta.itf').with({

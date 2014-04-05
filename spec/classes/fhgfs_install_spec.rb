@@ -19,6 +19,11 @@ describe 'fhgfs::install' do
     let(:user) { 'fhgfs' }
     let(:group) { 'fhgfs' }
 
+    let(:params) {{
+      'user'  => user,
+      'group' => group,
+    }}
+
     it_behaves_like 'debian-install', 'Debian', 'wheezy'
     it_behaves_like 'debian-install', 'Ubuntu', 'precise'
   end

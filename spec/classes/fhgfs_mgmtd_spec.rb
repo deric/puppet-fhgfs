@@ -11,12 +11,22 @@ describe 'fhgfs::mgmtd' do
   let(:user) { 'fhgfs' }
   let(:group) { 'fhgfs' }
 
+  let(:params) {{
+    :user  => user,
+    :group => group,
+  }}
+
   shared_examples 'debian-mgmtd' do |os, codename|
     let(:facts) {{
       :operatingsystem => os,
       :osfamily => 'Debian',
       :lsbdistcodename => codename,
       :lsbdistid => 'Debian',
+    }}
+
+    let(:params) {{
+      :user  => user,
+      :group => group,
     }}
     it { should contain_package('fhgfs-mgmtd') }
     it { should contain_package('fhgfs-utils') }
@@ -37,7 +47,9 @@ describe 'fhgfs::mgmtd' do
   context 'with given version' do
     let(:version) { '2012.10.r8.debian7' }
     let(:params) {{
-      :package_ensure => version
+      :package_ensure => version,
+      :user           => user,
+      :group          => group,
     }}
 
     it { should contain_package('fhgfs-mgmtd').with({
@@ -56,6 +68,8 @@ describe 'fhgfs::mgmtd' do
     let(:params) {{
       :interfaces      => ['eth0', 'ib0'],
       :interfaces_file => '/etc/fhgfs/mgmtd.itf',
+      :user            => user,
+      :group           => group,
     }}
 
     it { should contain_file('/etc/fhgfs/mgmtd.itf').with({

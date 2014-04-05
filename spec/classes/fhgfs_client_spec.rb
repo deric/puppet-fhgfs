@@ -11,6 +11,11 @@ describe 'fhgfs::client' do
   let(:user) { 'fhgfs' }
   let(:group) { 'fhgfs' }
 
+  let(:params) {{
+    :user  => user,
+    :group => group,
+  }}
+
   shared_examples 'debian_fhgfs-client' do |os, codename|
     let(:facts) {{
       :operatingsystem => os,
@@ -106,6 +111,8 @@ describe 'fhgfs::client' do
     let(:params) {{
       :interfaces      => ['eth0', 'ib0'],
       :interfaces_file => '/etc/fhgfs/client.itf',
+      :user            => user,
+      :group           => group,
     }}
 
     it { should contain_file('/etc/fhgfs/client.itf').with({

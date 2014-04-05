@@ -9,19 +9,15 @@ describe 'fhgfs::mount' do
     :lsbdistid => 'Debian',
   }}
 
-  let(:user) { 'fhgfs' }
-  let(:group) { 'fhgfs' }
   let(:title) { '/mnt/share' }
 
   let(:params) {{
-    :cfg => '/etc/fhgfs/fhgfs-clients.conf',
-    :mnt => '/mnt/share',
+    :cfg   => '/etc/fhgfs/fhgfs-clients.conf',
+    :mnt   => '/mnt/share',
   }}
 
   it { should contain_file('/etc/fhgfs/fhgfs-mounts.conf').with({
       'ensure'  => 'present',
-      'owner'   => user,
-      'group'   => group,
       'mode'    => '0755',
   })
   # testing file_line doesn't work this way

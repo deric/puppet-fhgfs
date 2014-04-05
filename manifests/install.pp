@@ -27,12 +27,13 @@ class fhgfs::install(
     before => Anchor['fhgfs::user'],
   }
 
-  file { $log_dir:
-    ensure  => directory,
+  # make sure log directory exists
+  ensure_resource('file', $log_dir, {
+    'ensure' => directory,
     owner   => $user,
     group   => $group,
     recurse => true,
     require => Anchor['fhgfs::user'],
-  }
+  })
 
 }

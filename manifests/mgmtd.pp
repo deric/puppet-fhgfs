@@ -35,14 +35,6 @@ class fhgfs::mgmtd (
     recurse => true,
   }
 
-  # make sure log directory exists
-  ensure_resource('file', $log_dir, {
-    'ensure' => directory,
-    owner   => $user,
-    group   => $group,
-    recurse => true,
-  })
-
   file { $interfaces_file:
     ensure => present,
     owner   => $user,
