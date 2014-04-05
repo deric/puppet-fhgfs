@@ -23,8 +23,8 @@ class fhgfs {
   $package_source                = hiera('fhgfs::package_source', 'fhgfs')
   $version                       = hiera('fhgfs::version', undef)
   $log_dir                       = hiera('fhgfs::log_dir', '/var/log/fhgfs')
-  $user                          = hiera('fhgfs::user', 'fhgfs')
-  $group                         = hiera('fhgfs::group','fhgfs')
+  $user                          = hiera('fhgfs::user', 'root')
+  $group                         = hiera('fhgfs::group','root')
   $major_version                 = hiera('fhgfs::major_version','fhgfs_2012.10')
   $admon_db_file                 = hiera('fhgfs::admon_db_file','/var/lib/fhgfs/fhgfs-admon.db')
 
