@@ -1,5 +1,5 @@
 name    'deric-fhgfs'
-version '0.2.4'
+version '0.2.5'
 source 'https://github.com/deric/puppet-fhgfs'
 author 'Tomas Barton'
 license 'Apache License, Version 2.0'
