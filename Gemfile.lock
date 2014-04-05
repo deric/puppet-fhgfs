@@ -25,7 +25,7 @@ GEM
       json
       thor (~> 0.15)
     metaclass (0.0.1)
-    mime-types (2.2)
+    mime-types (1.25.1)
     mocha (0.14.0)
       metaclass (~> 0.0.1)
     net-scp (1.1.2)
@@ -92,6 +92,7 @@ PLATFORMS
 
 DEPENDENCIES
   librarian-puppet (>= 0.9.10)
+  mime-types (< 2.0.0)
   puppet (>= 2.7.0)
   puppet-blacksmith!
   puppet-lint (>= 0.3.2)
