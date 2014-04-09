@@ -1,4 +1,4 @@
-require 'rspec-hiera-puppet'
+require 'hiera-puppet-helper'
 
 shared_context "hieradata" do
 
