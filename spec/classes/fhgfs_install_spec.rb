@@ -9,7 +9,7 @@ describe 'fhgfs::install' do
       :lsbdistid => 'Debian',
     }}
 
-    it { should include_class('fhgfs::repo') }
+    it { should contain_class('fhgfs::repo') }
 
     it { should contain_user('fhgfs') }
     it { should contain_group('fhgfs') }

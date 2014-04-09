@@ -27,7 +27,7 @@ describe 'fhgfs::meta' do
     it { should contain_package('fhgfs-meta') }
     it { should contain_package('fhgfs-utils') }
 
-    it { should include_class('fhgfs::repo::debian') }
+    it { should contain_class('fhgfs::repo::debian') }
 
     it { should contain_service('fhgfs-meta').with(
         :ensure => 'running',

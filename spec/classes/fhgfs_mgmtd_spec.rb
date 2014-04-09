@@ -31,7 +31,7 @@ describe 'fhgfs::mgmtd' do
     it { should contain_package('fhgfs-mgmtd') }
     it { should contain_package('fhgfs-utils') }
 
-    it { should include_class('fhgfs::repo::debian') }
+    it { should contain_class('fhgfs::repo::debian') }
 
     it { should contain_service('fhgfs-mgmtd').with(
         :ensure => 'running',
