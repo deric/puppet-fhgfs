@@ -25,6 +25,7 @@ describe 'fhgfs::client' do
     }}
     it { should contain_package('fhgfs-client') }
     it { should contain_package('kernel-package') }
+    it { should contain_package('linux-headers-generic') }
     it { should contain_package('fhgfs-helperd') }
     it { should contain_package('fhgfs-client') }
 

@@ -19,16 +19,24 @@ class fhgfs::client (
 
   case $::osfamily {
     Debian: {
-      package { 'kernel-package' :
-        ensure => $kernel_ensure,
-        before => Anchor['fhgfs::kernel_dev']
-      }
+      ensure_resource('package', 'kernel-package', {
+          'ensure' => $kernel_ensure,
+          'before' => Anchor['fhgfs::kernel_dev']
+        }
+      )
+      # we need current linux headers for building client module
+      ensure_resource('package', 'linux-headers-generic', {
+          'ensure' => 'present',
+          'before' => Anchor['fhgfs::kernel_dev']
+        }
+      )
     }
     RedHat: {
-      package { 'kernel-devel' :
-        ensure => $kernel_ensure,
-        before => Anchor['fhgfs::kernel_dev']
-      }
+      ensure_resource('package', 'kernel-devel', {
+          'ensure' => $kernel_ensure,
+          'before' => Anchor['fhgfs::kernel_dev']
+        }
+      )
     }
     default: {
       fail("OS Family '${::osfamily}' is not supported yet")
