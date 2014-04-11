@@ -4,13 +4,13 @@
 #
 class fhgfs::admon (
   $enable            = true,
-  $mgmtd_host        = $fhgfs::mgmtd_host,
-  $db_file           = $fhgfs::admon_db_file,
-  $log_dir           = $fhgfs::log_dir,
+  $mgmtd_host        = hiera('fhgfs::mgmtd_host', $fhgfs::mgmtd_host),
+  $db_file           = hiera('fhgfs::admon_db_file', $fhgfs::admon_db_file),
+  $log_dir           = hiera('fhgfs::log_dir', $fhgfs::log_dir),
   $log_level         = 2,
-  $user              = $fhgfs::user,
-  $group             = $fhgfs::group,
-  $package_ensure    = $fhgfs::package_ensure,
+  $user              = hiera('fhgfs::user', $fhgfs::user),
+  $group             = hiera('fhgfs::group', $fhgfs::group),
+  $package_ensure    = hiera('fhgfs::package_ensure', $fhgfs::package_ensure),
 ) inherits fhgfs {
 
   require fhgfs::install

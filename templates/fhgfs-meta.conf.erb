@@ -15,7 +15,7 @@
 
 logLevel                  = <%= @log_level %>
 logNoDate                 = false
-logStdFile                = <%= scope.lookupvar('fhgfs::meta::log_dir') %>/meta.log
+logStdFile                = <%= @log_dir %>/meta.log
 logNumLines               = 50000
 logNumRotatedFiles        = 5
 
@@ -32,7 +32,7 @@ connInterfacesFile        = <%= @interfaces_file %>
 connNetFilterFile         =
 connNonPrimaryExpiration  = 10000
 
-storeMetaDirectory        = <%= scope.lookupvar('fhgfs::meta::meta_directory') %>
+storeMetaDirectory        = <%= @meta_directory %>
 storeAllowFirstRunInit    = true
 storeUseExtendedAttribs   = true
 

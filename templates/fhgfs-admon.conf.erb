@@ -15,7 +15,7 @@
 
 logLevel                 = <%= @log_level %>
 logNoDate                = false
-logStdFile               = <%= scope.lookupvar('fhgfs::admon::log_dir') %>/admon.log
+logStdFile               = <%= @log_dir %>/admon.log
 logNumLines              = 50000
 logNumRotatedFiles       = 2
 
@@ -29,13 +29,13 @@ connNonPrimaryExpiration = 10000
 
 tuneNumWorkers           = 4
 
-sysMgmtdHost             = <%= scope.lookupvar('fhgfs::admon::mgmtd_host') %>
+sysMgmtdHost             = <%= @mgmtd_host %>
 
 runDaemonized            = true
 
 httpPort                 = 8000
 queryInterval            = 5
-databaseFile             = <%= scope.lookupvar('fhgfs::admon::db_file') %>
+databaseFile             = <%= @db_file %>
 clearDatabase            = false
 
 mailEnabled              = false

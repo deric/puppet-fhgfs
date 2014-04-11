@@ -15,7 +15,7 @@
 
 logLevel                       = <%= @log_level %>
 logNoDate                      = false
-logStdFile                     = <%= scope.lookupvar('fhgfs::mgmtd::log_dir') %>/mgmtd.log
+logStdFile                     = <%= @log_dir %>/mgmtd.log
 logNumLines                    = 50000
 logNumRotatedFiles             = 5
 
@@ -26,17 +26,17 @@ connBacklogTCP                 = 128
 connInterfacesFile             = <%= @interfaces_file %>
 connNetFilterFile              =
 
-storeMgmtdDirectory            = <%= scope.lookupvar('fhgfs::mgmtd::directory') %>
+storeMgmtdDirectory            = <%= @directory %>
 storeAllowFirstRunInit         = true
 
 tuneNumWorkers                 = 4
 tuneMetaNodeAutoRemoveMins     = 0
 tuneStorageNodeAutoRemoveMins  = 0
-tuneClientAutoRemoveMins       = <%= scope.lookupvar('fhgfs::client_auto_remove_mins') %>
-tuneMetaSpaceLowLimit          = <%= scope.lookupvar('fhgfs::meta_space_low_limit') %>
-tuneMetaSpaceEmergencyLimit    = <%= scope.lookupvar('fhgfs::meta_space_emergency_limit') %>
-tuneStorageSpaceLowLimit       = <%= scope.lookupvar('fhgfs::storage_space_low_limit') %>
-tuneStorageSpaceEmergencyLimit = <%= scope.lookupvar('fhgfs::storage_space_emergency_limit') %>
+tuneClientAutoRemoveMins       = <%= @client_auto_remove_mins %>
+tuneMetaSpaceLowLimit          = <%= @meta_space_low_limit %>
+tuneMetaSpaceEmergencyLimit    = <%= @meta_space_emergency_limit %>
+tuneStorageSpaceLowLimit       = <%= @storage_space_low_limit %>
+tuneStorageSpaceEmergencyLimit = <%= @storage_space_emergency_limit %>
 
 sysAllowNewServers             = true
 sysForcedRoot                  =
