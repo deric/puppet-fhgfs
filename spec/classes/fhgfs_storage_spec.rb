@@ -110,4 +110,24 @@ describe 'fhgfs::storage' do
     ).with_content(/logLevel(\s+)=(\s+)5/) }
   end
 
+  context 'set mgmtd host' do
+    let(:params) {{
+      :mgmtd_host => 'mgmtd.fhgfs.com',
+    }}
+
+    it { should contain_file(
+      '/etc/fhgfs/fhgfs-storage.conf'
+    ).with_content(/sysMgmtdHost(\s+)=(\s+)mgmtd.fhgfs.com/) }
+  end
+
+  context 'set mgmtd tcp port' do
+    let(:params) {{
+      :mgmtd_tcp_port => 9009,
+    }}
+
+    it { should contain_file(
+      '/etc/fhgfs/fhgfs-storage.conf'
+    ).with_content(/connMgmtdPortTCP(\s+)=(\s+)9009/) }
+  end
+
 end

@@ -15,13 +15,13 @@
 
 logLevel               = <%= @log_level %>
 logNoDate              = false
-logStdFile             = <%= scope.lookupvar('fhgfs::storage::log_dir') %>/storage.log
+logStdFile             = <%= @log_dir %>/storage.log
 logNumLines            = 50000
 logNumRotatedFiles     = 5
 
 connPortShift          = 0
-connMgmtdPortUDP       = 8008
-connMgmtdPortTCP       = 8008
+connMgmtdPortUDP       = <%= @mgmtd_udp_port %>
+connMgmtdPortTCP       = <%= @mgmtd_tcp_port %>
 connStoragePortUDP     = 8003
 connStoragePortTCP     = 8003
 connUseSDP             = false
@@ -30,7 +30,7 @@ connBacklogTCP         = 128
 connInterfacesFile     = <%= @interfaces_file %>
 connNetFilterFile      =
 
-storeStorageDirectory  = <%= scope.lookupvar('fhgfs::storage::storage_directory') %>
+storeStorageDirectory  = <%= @storage_directory %>
 storeAllowFirstRunInit = true
 
 tuneNumWorkers         = 8
@@ -38,7 +38,7 @@ tuneWorkerBufSize      = 4m
 tuneFileReadSize       = 32k
 tuneFileWriteSize      = 64k
 
-sysMgmtdHost           = <%= scope.lookupvar('fhgfs::storage::mgmtd_host') %>
+sysMgmtdHost           = <%= @mgmtd_host %>
 
 runDaemonized          = true
 

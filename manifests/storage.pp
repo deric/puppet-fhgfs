@@ -13,6 +13,8 @@ class fhgfs::storage (
   $package_ensure    = $fhgfs::package_ensure,
   $interfaces        = ['eth0'],
   $interfaces_file   = '/etc/fhgfs/storage.interfaces',
+  $mgmtd_tcp_port                      = 8008,
+  $mgmtd_udp_port                      = 8008,
 ) inherits fhgfs {
 
   require fhgfs::install
