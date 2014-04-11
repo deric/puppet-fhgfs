@@ -3,11 +3,11 @@
 # This module manages FhGFS basic packages installation
 #
 class fhgfs::install(
-  $manage_repo    = hiera('fhgfs::manage_repo', $fhgfs::manage_repo),
-  $package_source = hiera('fhgfs::package_source', $fhgfs::package_source),
-  $log_dir        = hiera('fhgfs::log_dir', $fhgfs::log_dir),
-  $user           = hiera('fhgfs::user', $fhgfs::user),
-  $group          = hiera('fhgfs::group', $fhgfs::group),
+  $manage_repo    = $fhgfs::manage_repo,
+  $package_source = $fhgfs::package_source,
+  $log_dir        = $fhgfs::log_dir,
+  $user           = $fhgfs::user,
+  $group          = $fhgfs::group,
   ) inherits fhgfs {
 
   class { 'fhgfs::repo':

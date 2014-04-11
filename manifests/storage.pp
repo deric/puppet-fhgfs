@@ -4,12 +4,12 @@
 #
 class fhgfs::storage (
   $enable            = true,
-  $storage_directory = hiera('fhgfs::storage_directory', $fhgfs::storage_directory),
-  $mgmtd_host        = hiera('fhgfs::mgmtd_host', $fhgfs::mgmtd_host),
-  $log_dir           = hiera('fhgfs::log_dir', $fhgfs::log_dir),
+  $storage_directory = $fhgfs::storage_directory,
+  $mgmtd_host        = $fhgfs::mgmtd_host,
+  $log_dir           = $fhgfs::log_dir,
   $log_level         = 3,
-  $user              = hiera('fhgfs::user', $fhgfs::user),
-  $group             = hiera('fhgfs::group', $fhgfs::group),
+  $user              = $fhgfs::user,
+  $group             = $fhgfs::group,
   $package_ensure    = hiera('fhgfs::package_ensure', $fhgfs::package_ensure),
   $interfaces        = ['eth0'],
   $interfaces_file   = '/etc/fhgfs/storage.interfaces',
