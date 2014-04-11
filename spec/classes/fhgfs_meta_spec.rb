@@ -1,7 +1,8 @@
 require 'spec_helper'
-require 'shared_contexts'
 
 describe 'fhgfs::meta' do
+  include_context 'hieradata'
+
   let(:facts) {{
     :operatingsystem => 'Debian',
     :osfamily => 'Debian',
@@ -123,8 +124,8 @@ describe 'fhgfs::meta' do
   end
 
   context 'hiera should override defaults' do
-    let(:hiera_data) {{
-      'fhgfs::mgmtd_host' => '192.168.1.1',
+    let(:params) {{
+      :mgmtd_host => '192.168.1.1',
     }}
 
     it {

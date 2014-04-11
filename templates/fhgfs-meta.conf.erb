@@ -39,7 +39,7 @@ storeUseExtendedAttribs   = true
 tuneNumWorkers            = 0
 tuneTargetChooser         = randomized
 
-sysMgmtdHost              = <%= scope.lookupvar('fhgfs::meta::mgmtd_host') %>
+sysMgmtdHost              = <%= @mgmtd_host %>
 
 runDaemonized             = true
 

@@ -10,6 +10,9 @@ class fhgfs::client (
   $interfaces      = ['eth0'],
   $interfaces_file = '/etc/fhgfs/client.interfaces',
   $log_level       = 3,
+  $mgmtd_host      = hiera('fhgfs::mgmtd_host', $fhgfs::mgmtd_host),
+  $mgmtd_tcp_port  = 8008,
+  $mgmtd_udp_port  = 8008,
 ) inherits fhgfs {
 
   require fhgfs::install

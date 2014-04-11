@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe 'fhgfs::client' do
+  include_context 'hieradata'
+
   let(:facts) {{
     :operatingsystem => 'Debian',
     :osfamily => 'Debian',
@@ -142,6 +144,18 @@ describe 'fhgfs::client' do
     it { should contain_file(
       '/etc/fhgfs/fhgfs-client.conf'
     ).with_content(/logLevel(\s+)=(\s+)5/) }
+  end
+
+  context 'allow changing mgmtd_host' do
+    let(:params) {{
+      :mgmtd_host => '192.168.1.1',
+    }}
+
+    it {
+      should contain_file(
+        '/etc/fhgfs/fhgfs-client.conf'
+      ).with_content(/sysMgmtdHost(\s+)=(\s+)192.168.1.1/)
+    }
   end
 
 end

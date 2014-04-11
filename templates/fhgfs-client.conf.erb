@@ -19,8 +19,8 @@ logClientID                   = false
 logHelperdIP                  =
 
 connPortShift                 = 0
-connMgmtdPortUDP              = 8008
-connMgmtdPortTCP              = 8008
+connMgmtdPortUDP              = <%= @mgmtd_udp_port %>
+connMgmtdPortTCP              = <%= @mgmtd_tcp_port %>
 connClientPortUDP             = 8004
 connHelperdPortTCP            = 8006
 connUseSDP                    = false
@@ -41,7 +41,7 @@ tuneFileCacheType             = buffered
 tuneRemoteFSync               = true
 tuneUseGlobalFileLocks        = false
 
-sysMgmtdHost                  = <%= scope.lookupvar('fhgfs::mgmtd_host') %>
+sysMgmtdHost                  = <%= @mgmtd_host %>
 sysCreateHardlinksAsSymlinks  = true
 sysMountSanityCheckMS         = 11000
 sysSyncOnClose                = false

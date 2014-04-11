@@ -4,7 +4,8 @@ require 'rubygems'
 require 'puppetlabs_spec_helper/module_spec_helper'
 require 'rspec-puppet/coverage'
 require 'rspec/expectations'
-require 'hiera-puppet-helper'
+
+require 'shared_contexts'
 
 fixture_path = File.expand_path(File.join(__FILE__, '..', 'fixtures'))
 
