@@ -122,18 +122,16 @@ describe 'fhgfs::meta' do
     ).with_content(/logLevel(\s+)=(\s+)5/) }
   end
 
- # context 'with hiera' do
- #    include_context 'hieradata'
- #
- #    let(:hiera_data) { {
- #      'fhgfs::mgmtd_host' => '192.168.1.1',
- #    } }
- #
- #   it {
- #     should contain_file(
- #       '/etc/fhgfs/fhgfs-meta.conf'
- #     ).with_content(/sysMgmtdHost(\s+)=(\s+)192.168.1.1/)
- #   }
- # end
+  context 'hiera should override defaults' do
+    let(:hiera_data) {{
+      'fhgfs::mgmtd_host' => '192.168.1.1',
+    }}
+
+    it {
+      should contain_file(
+        '/etc/fhgfs/fhgfs-meta.conf'
+      ).with_content(/sysMgmtdHost(\s+)=(\s+)192.168.1.1/)
+    }
+  end
 
 end
