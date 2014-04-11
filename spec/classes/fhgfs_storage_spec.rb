@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe 'fhgfs::storage' do
 
+  include_context 'hieradata'
+
+  let(:hiera_data) { { 'fhgfs::mgmtd_host' => "foo.bar" } }
+
   let(:facts) {{
     :operatingsystem => 'Debian',
     :osfamily => 'Debian',

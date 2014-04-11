@@ -5,7 +5,7 @@
 class fhgfs::storage (
   $enable            = true,
   $storage_directory = $fhgfs::storage_directory,
-  $mgmtd_host        = $fhgfs::mgmtd_host,
+  $mgmtd_host        = hiera('fhgfs::mgmtd_host', $fhgfs::mgmtd_host),
   $log_dir           = $fhgfs::log_dir,
   $log_level         = 3,
   $user              = $fhgfs::user,
@@ -13,8 +13,8 @@ class fhgfs::storage (
   $package_ensure    = $fhgfs::package_ensure,
   $interfaces        = ['eth0'],
   $interfaces_file   = '/etc/fhgfs/storage.interfaces',
-  $mgmtd_tcp_port                      = 8008,
-  $mgmtd_udp_port                      = 8008,
+  $mgmtd_tcp_port    = 8008,
+  $mgmtd_udp_port    = 8008,
 ) inherits fhgfs {
 
   require fhgfs::install

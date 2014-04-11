@@ -6,7 +6,7 @@ class fhgfs::install(
   $manage_repo    = $fhgfs::manage_repo,
   $package_source = $fhgfs::package_source,
   $log_dir        = $fhgfs::log_dir,
-  $user           = $fhgfs::user,
+  $user           = hiera('fhgfs::user', $fhgfs::user),
   $group          = $fhgfs::group,
   ) inherits fhgfs {
 

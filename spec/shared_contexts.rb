@@ -1,14 +1,18 @@
 require 'hiera-puppet-helper'
 
 shared_context "hieradata" do
+  fixture_path = File.expand_path(File.join(__FILE__, '..', 'fixtures'))
 
   let :hiera_config do
-    {
-      # this specifies that rspec overrides what's been defined in `riak::params`
-      :backends => ['rspec', 'puppet'],
-      :hierarchy => ['default'],
-      :puppet   => { :datasource => 'params' },
-      :rspec    => respond_to?(:hiera_data) ? hiera_data : {}
+    { :backends => ['rspec', 'yaml'],
+      :hierarchy => [
+        '%{fqdn}/%{calling_module}',
+        '%{calling_module}',
+        'common.yaml'
+        ],
+      :yaml => {
+        :datadir => File.join(fixture_path, 'data') },
+      :rspec => respond_to?(:hiera_data) ? hiera_data : {}
     }
   end
 
