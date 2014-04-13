@@ -12,3 +12,4 @@ gem 'hiera-puppet-helper', :git => 'https://github.com/mmz-srf/hiera-puppet-help
 gem 'puppet-blacksmith',  :git => 'https://github.com/maestrodev/puppet-blacksmith.git'
 gem 'rspec-puppet', :git => 'https://github.com/rodjek/rspec-puppet.git'
 gem 'mime-types', '< 2.0.0'
+gem 'rspec-longrun'
