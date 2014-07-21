@@ -28,7 +28,6 @@ class fhgfs::storage (
     ensure  => directory,
     owner   => $user,
     group   => $group,
-    recurse => true,
   }
 
   file { $interfaces_file:
