@@ -47,7 +47,7 @@ class fhgfs::client (
   }
 
   file { $interfaces_file:
-    ensure => present,
+    ensure  => present,
     owner   => $user,
     group   => $group,
     mode    => '0755',
@@ -68,20 +68,20 @@ class fhgfs::client (
 
 
   package { 'fhgfs-helperd':
-    ensure   => $package_ensure,
+    ensure => $package_ensure,
   }
 
   package { 'fhgfs-client':
-    ensure   => $package_ensure,
-    require  => Anchor['fhgfs::kernel_dev'],
+    ensure  => $package_ensure,
+    require => Anchor['fhgfs::kernel_dev'],
   }
 
   service { 'fhgfs-helperd':
-    ensure   => running,
-    enable   => true,
+    ensure     => running,
+    enable     => true,
     hasstatus  => true,
     hasrestart => true,
-    require  => Package['fhgfs-helperd'],
+    require    => Package['fhgfs-helperd'],
   }
 
   file { '/etc/fhgfs/fhgfs-mounts.conf':
@@ -93,7 +93,7 @@ class fhgfs::client (
   }
 
   service { 'fhgfs-client':
-    ensure   => running,
+    ensure     => running,
     enable     => true,
     hasstatus  => true,
     hasrestart => true,
@@ -103,7 +103,7 @@ class fhgfs::client (
       File['/etc/fhgfs/fhgfs-mounts.conf'],
       File[$interfaces_file],
     ],
-    subscribe => [
+    subscribe  => [
       File['/etc/fhgfs/fhgfs-mounts.conf'],
       File[$interfaces_file],
     ],

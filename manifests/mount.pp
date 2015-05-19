@@ -13,10 +13,10 @@ define fhgfs::mount (
   include fhgfs::client
 
   file { $mnt:
-    ensure  => directory,
-    owner   => $user,
-    group   => $group,
-    mode    => '0755',
+    ensure => directory,
+    owner  => $user,
+    group  => $group,
+    mode   => '0755',
   }
 
   file_line { 'mnt_config':

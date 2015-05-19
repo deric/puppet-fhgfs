@@ -23,7 +23,7 @@ class fhgfs::meta (
   }
 
   file { $interfaces_file:
-    ensure => present,
+    ensure  => present,
     owner   => $user,
     group   => $group,
     mode    => '0755',
@@ -37,20 +37,20 @@ class fhgfs::meta (
     mode    => '0755',
     content => template('fhgfs/fhgfs-meta.conf.erb'),
     require => [
-      File["$interfaces_file"],
+      File[$interfaces_file],
       Package['fhgfs-meta'],
     ],
   }
 
   service { 'fhgfs-meta':
-    ensure    => running,
-    enable    => $enable,
+    ensure     => running,
+    enable     => $enable,
     hasstatus  => true,
     hasrestart => true,
-    require   => Package['fhgfs-meta'],
-    subscribe => [
+    require    => Package['fhgfs-meta'],
+    subscribe  => [
       File['/etc/fhgfs/fhgfs-meta.conf'],
-      File["$interfaces_file"]
+      File[$interfaces_file]
     ],
   }
 }

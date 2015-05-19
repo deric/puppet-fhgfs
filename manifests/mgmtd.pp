@@ -24,7 +24,7 @@ class fhgfs::mgmtd (
   validate_array($interfaces)
 
   package { 'fhgfs-mgmtd':
-    ensure  => $package_ensure,
+    ensure => $package_ensure,
   }
 
   # mgmgtd main directory
@@ -36,7 +36,7 @@ class fhgfs::mgmtd (
   }
 
   file { $interfaces_file:
-    ensure => present,
+    ensure  => present,
     owner   => $user,
     group   => $group,
     mode    => '0755',

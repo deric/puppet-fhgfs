@@ -25,13 +25,13 @@ class fhgfs::storage (
   }
 
   file { $storage_directory:
-    ensure  => directory,
-    owner   => $user,
-    group   => $group,
+    ensure => directory,
+    owner  => $user,
+    group  => $group,
   }
 
   file { $interfaces_file:
-    ensure => present,
+    ensure  => present,
     owner   => $user,
     group   => $group,
     mode    => '0755',
@@ -45,20 +45,20 @@ class fhgfs::storage (
     mode    => '0755',
     content => template('fhgfs/fhgfs-storage.conf.erb'),
     require => [
-      File["$interfaces_file"],
+      File[$interfaces_file],
       Package['fhgfs-storage'],
     ],
   }
 
   service { 'fhgfs-storage':
-    ensure    => running,
-    enable    => $enable,
+    ensure     => running,
+    enable     => $enable,
     hasstatus  => true,
     hasrestart => true,
-    require   => Package['fhgfs-storage'],
-    subscribe => [
+    require    => Package['fhgfs-storage'],
+    subscribe  => [
       File['/etc/fhgfs/fhgfs-storage.conf'],
-      File["$interfaces_file"],
+      File[$interfaces_file],
     ],
   }
 }
