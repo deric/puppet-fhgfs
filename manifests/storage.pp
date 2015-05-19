@@ -10,7 +10,7 @@ class fhgfs::storage (
   $log_level         = 3,
   $user              = $fhgfs::user,
   $group             = $fhgfs::group,
-  $package_ensure    = hiera('fhgfs::package_ensure', $fhgfs::package_ensure),
+  $package_ensure    = $fhgfs::package_ensure,
   $interfaces        = ['eth0'],
   $interfaces_file   = '/etc/fhgfs/storage.interfaces',
   $mgmtd_tcp_port    = 8008,

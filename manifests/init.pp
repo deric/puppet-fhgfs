@@ -8,7 +8,7 @@
 #
 # === Copyright
 #
-# Copyright 2013 Tomas Barton, unless otherwise noted.
+# Copyright 2013-2015 Tomas Barton, unless otherwise noted.
 #
 class fhgfs (
   $manage_repo                   = true,

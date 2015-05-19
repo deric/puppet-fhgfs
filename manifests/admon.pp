@@ -10,7 +10,7 @@ class fhgfs::admon (
   $log_level         = 2,
   $user              = $fhgfs::user,
   $group             = $fhgfs::group,
-  $package_ensure    = hiera('fhgfs::package_ensure', $fhgfs::package_ensure),
+  $package_ensure    = $fhgfs::package_ensure,
 ) inherits fhgfs {
 
   require fhgfs::install
