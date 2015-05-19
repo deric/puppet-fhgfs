@@ -5,15 +5,16 @@
   "source": "https://github.com/deric/puppet-fhgfs",
   "summary": "Module for managing FhGFS",
   "project_page": "https://github.com/deric/puppet-fhgfs",
-  "types": [
-
-  ],
   "name": "deric-fhgfs",
   "description": "The Fraunhofer Parallel File System (FhGFS) is the high-performance parallel file system of the Fraunhofer Institute for Industrial Mathematics in Kaiserslautern, Germany. It includes a distributed metadata architecture that has been designed to provide the scalability and flexibility required to run today's most demanding HPC applications while being easy to use and manage.",
   "dependencies": [
     {
       "version_requirement": ">= 1.0.0",
       "name": "puppetlabs/apt"
+    },
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 0.1.6"
     }
   ]
 }

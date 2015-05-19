@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe 'fhgfs::meta' do
-  include_context 'hieradata'
-
   let(:facts) {{
     :operatingsystem => 'Debian',
     :osfamily => 'Debian',

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'fhgfs::init' do
+describe 'fhgfs' do
 
   let(:facts) {{
     :operatingsystem => 'Debian',
