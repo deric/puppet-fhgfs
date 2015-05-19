@@ -1,6 +1,7 @@
 # Puppet FhGFS
 
-[![Build Status](https://travis-ci.org/deric/puppet-fhgfs.png?branch=travis)](https://travis-ci.org/deric/puppet-fhgfs)
+[![Puppet
+Forge](http://img.shields.io/puppetforge/v/deric/fhgfs.svg)](https://forge.puppetlabs.com/deric/fhgfs) [![Build Status](https://travis-ci.org/deric/puppet-fhgfs.png?branch=travis)](https://travis-ci.org/deric/puppet-fhgfs)
 
 This is the puppet-fhgfs module for managing the Fraunhofer Parallel File System (FhGFS)
 
